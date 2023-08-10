@@ -11,13 +11,15 @@ const styles = StyleSheet.create({
       innerContainer:{
         position:'absolute',
         backgroundColor:'white',
-        alignSelf:'center'
+        alignSelf:'center',
+        borderWidth:2,
+        borderColor:'black'
       },
       innerContainerHeaderBtn:{
-        width:'48%',
-        height:'50%',
-        borderWidth:0.5,
-        borderColor:'grey',
+        width:'50%',
+        height:'100%',
+        borderWidth:2,
+        borderColor:'black',
         justifyContent:'center',
         alignItems:'center'
 

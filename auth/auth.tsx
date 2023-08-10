@@ -12,14 +12,16 @@ const AuthScreen:FC = () => {
     const [password,setPassword] = useState('')
     return (
         <View style={styles.container}>
-            <View style={[styles.innerContainer,{borderRadius:windowWidth*0.05,width:'90%',height:'70%'}]}>
-             <View style={{width:'100%',height:'15%',borderBottomWidth:1,alignItems:'center',justifyContent:'space-between',flexDirection:'row',paddingHorizontal:windowWidth*0.02}}>
-                <TouchableOpacity onPress={()=>setTabActive('register')} style={[styles.innerContainerHeaderBtn,{borderRadius:windowWidth*0.01,
-                    backgroundColor: tabActive === "register" ? '#1B98E0' : 'white'} ]}>
-                    <Text>Register</Text>
+            <View style={[styles.innerContainer,{borderRadius:windowWidth*0.01,width:'95%',height:'65%'}]}>
+             <View style={{width:'100%',height:'10%',borderBottomWidth:1,alignItems:'center',justifyContent:'space-between',flexDirection:'row'}}>
+                <TouchableOpacity onPress={()=>setTabActive('register')} style={[styles.innerContainerHeaderBtn,{
+                    backgroundColor: tabActive === "register" ? '#0B0033' : 'white',} ]}>
+                    <Text style={{color:tabActive === "register"?'white':'black',fontSize:windowWidth*0.05,fontWeight:'bold'}}>Register</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>setTabActive('login')} style={[styles.innerContainerHeaderBtn,{borderRadius:windowWidth*0.01,
-                    backgroundColor: tabActive === "login" ? '#1B98E0' : 'white'}]}><Text>Login</Text></TouchableOpacity>
+                <TouchableOpacity onPress={()=>setTabActive('login')} style={[styles.innerContainerHeaderBtn,{
+                    backgroundColor: tabActive === "login" ? '#0B0033' : 'white'}]}>
+                        <Text style={{color:tabActive === "login"?'white':'black',fontSize:windowWidth*0.05,fontWeight:'bold'}}>Login</Text>
+                    </TouchableOpacity>
              </View>
 
              <ScrollView>
