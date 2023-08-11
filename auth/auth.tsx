@@ -2,9 +2,6 @@ import React, { FC } from 'react';
 import { useState } from 'react';
 import { View,Text,Image,Dimensions,TouchableWithoutFeedback,ScrollView,TouchableOpacity,TextInput,ImageBackground,Keyboard, KeyboardAvoidingView,SafeAreaView } from 'react-native';
 import styles from './authstyles'
-import {
-    KeyboardAwareScrollView,
-  } from 'react-native-keyboard-aware-scroll-view';
 import * as Font from 'expo-font'; 
 
 const AuthScreen:FC = () => {
@@ -78,6 +75,8 @@ const AuthScreen:FC = () => {
 
                 <TouchableOpacity style={[styles.signUpBtn,{borderRadius:windowWidth*0.03,marginTop:windowWidth*0.2,height:windowWidth*0.15}]}>
                     <Text style={[styles.signUpBtnTxt,{fontSize:windowWidth*0.05}]}>SignUp</Text></TouchableOpacity>
+                
+                <Text style={{fontSize:windowWidth*0.04,marginTop:windowWidth*0.04,alignSelf:'center',fontWeight:'bold'}}>forgot password ?</Text>
 
                 </View>)
                 :                 
@@ -108,6 +107,7 @@ const AuthScreen:FC = () => {
 
                 <TouchableOpacity style={[styles.signUpBtn,{borderRadius:windowWidth*0.03,marginTop:windowWidth*0.15,height:windowWidth*0.15}]}>
                     <Text style={[styles.signUpBtnTxt,{fontSize:windowWidth*0.05}]}>Login</Text></TouchableOpacity>
+                
                 </View>
                 )
             }
