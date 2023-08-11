@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         flex:1
       },
       innerContainer:{
-        backgroundColor:'rgba(255, 255, 255, 0.8)',
+        backgroundColor:'rgba(255, 255, 255, 0.6)',
         alignSelf:'center',
         borderWidth:2,
         borderColor:'black'

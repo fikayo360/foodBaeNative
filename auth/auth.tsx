@@ -22,6 +22,7 @@ const AuthScreen:FC = () => {
          <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={{width:'100%',height:'100%',justifyContent:"center",alignItems:'center'}}>
             <View style={[styles.innerContainer,{borderRadius:windowWidth*0.01,width:'95%',height:'90%'}]}>
+            
              <View style={{width:'100%',height:'10%',borderBottomWidth:1,alignItems:'center',justifyContent:'space-between',flexDirection:'row'}}>
                 <TouchableOpacity onPress={()=>setTabActive('register')} style={[styles.innerContainerHeaderBtn,{
                     backgroundColor: tabActive === "register" ? '#0B0033' : 'white',} ]}>
@@ -32,8 +33,8 @@ const AuthScreen:FC = () => {
                         <Text style={{color:tabActive === "login"?'white':'black',fontSize:windowWidth*0.05,fontWeight:'bold'}}>Login</Text>
                     </TouchableOpacity>
              </View>
-
-             <ScrollView contentContainerStyle={{width:'100%',height:'100%',justifyContent:"center",alignItems:'center'}}>
+             <ScrollView contentContainerStyle={{width:'100%',height:'100%',justifyContent:"center",alignItems:'center',paddingTop:windowWidth*0.09}}>
+             
              <View style={styles.inputs}>
              
             {
@@ -57,7 +58,7 @@ const AuthScreen:FC = () => {
                 
                 <TextInput
                 style={[styles.inputStyles,{marginLeft:windowWidth*0.02,fontSize:windowWidth*0.04}]}
-                onChangeText={text => setEmail(text)}
+                onChangeText={text => setUsername(text)}
                 value={username}
                 placeholder="Username"
                 />
@@ -112,8 +113,8 @@ const AuthScreen:FC = () => {
             }
             
              </View>
+           
              </ScrollView>
-
              </View>
             </ScrollView>
          </SafeAreaView>
