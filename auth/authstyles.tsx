@@ -1,16 +1,16 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        position:'relative',
-        backgroundColor:'#32CD32',
-        alignItems:'center',
-        justifyContent:'center'
+  container:{
+    backgroundColor:'#32CD32',
+    flex: 1,
+    position:'relative'
+  },
+      inner:{
+        flex:1
       },
       innerContainer:{
-        position:'absolute',
-        backgroundColor:'white',
+        backgroundColor:'rgba(255, 255, 255, 0.8)',
         alignSelf:'center',
         borderWidth:2,
         borderColor:'black'
@@ -28,17 +28,33 @@ const styles = StyleSheet.create({
         color:'black'
       },
       inputs: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height:'85%'
+        width: '100%'
       },
       inputsWrap:{
+        alignSelf:'center',
+        width:'95%',
         alignItems: 'center',
-        justifyContent:'space-between',
         flexDirection:'row',
-        borderWidth:0.5,
-        borderColor:'grey'
+        borderWidth:2,
+        borderColor:'black'
+      },
+      inputStyles:{
+        width:'80%'
+      },
+      signUpBtn:{
+        backgroundColor:'#0B0033',
+        width:'95%',
+        alignSelf:'center',
+        justifyContent:'center',
+        alignItems:'center'
+      },
+      signUpBtnTxt:{
+        color:'white'
+      },
+      scrollViewContent: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
       }
 })
 
