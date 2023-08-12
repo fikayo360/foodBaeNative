@@ -1,7 +1,10 @@
 import React, { FC } from 'react';
 import { useState } from 'react';
-import { View,Text,Image,Dimensions,TouchableWithoutFeedback,ScrollView,TouchableOpacity,TextInput,ImageBackground,Keyboard, KeyboardAvoidingView,SafeAreaView } from 'react-native';
+import { View,Text,Image,Dimensions,TouchableWithoutFeedback,ScrollView,TouchableOpacity,TextInput,ActivityIndicator,SafeAreaView } from 'react-native';
 import styles from './authstyles'
+import AuthApi from '../api/authApp';
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 import * as Font from 'expo-font'; 
 
 const AuthScreen:FC = () => {
@@ -14,7 +17,64 @@ const AuthScreen:FC = () => {
     const [lpassword,setLpassword] = useState('')
     const [passwordVisible,setPasswordVisible] = useState(true)
     const togglePasswordVisibility = () => setPasswordVisible(!passwordVisible)
-   
+    const [loading,setLoading] = useState(true)
+    const [loadingL,setLoadingL] = useState(true)
+    const Api = new AuthApi()
+    const navigation = useNavigation();
+
+    const handleSignup = async() => {
+        if (!username || !email || !password){
+            console.log('fields cant be empty')
+            return
+        }
+
+        const formData = {
+            username,email,password
+        }
+        try{
+            console.log(formData);
+            setLoading(false)
+            const response = await Api.Signup(formData)
+            console.log(response.data);
+            setUsername('')
+            setEmail('')
+            setPassword('')
+            setLoading(true)
+        }catch(err){
+            if (axios.isAxiosError(err)) {
+                console.log(err.response?.data);
+                setLoading(true)
+                //return err.response?.data;
+              }
+        }
+    }
+
+    const handleLogin = async() => {
+        if (!lusername ||  !lpassword){
+            console.log('fields cant be empty')
+            return
+        }
+
+        let loginData = {
+            username:lusername,password:lpassword
+        }
+        try{
+            setLoadingL(false)
+            const response = await Api.Login(loginData)
+            console.log(response.data);
+            //navigation.navigate('home')
+            setLoadingL(true)
+            setLusername('')
+            setLpassword('')
+        }catch(err){
+            if (axios.isAxiosError(err)) {
+                console.log(err.response?.data);
+                setLoadingL(true)
+                //return err.response?.data;
+              }
+        }
+    }
+
     return (
          <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={{width:'100%',height:'100%',justifyContent:"center",alignItems:'center'}}>
@@ -73,8 +133,10 @@ const AuthScreen:FC = () => {
                 />     
                 </View>
 
-                <TouchableOpacity style={[styles.signUpBtn,{borderRadius:windowWidth*0.03,marginTop:windowWidth*0.2,height:windowWidth*0.15}]}>
-                    <Text style={[styles.signUpBtnTxt,{fontSize:windowWidth*0.05}]}>SignUp</Text></TouchableOpacity>
+                <TouchableOpacity onPress={handleSignup} style={[styles.signUpBtn,{borderRadius:windowWidth*0.03,marginTop:windowWidth*0.2,height:windowWidth*0.15}]}>
+                    {loading?<Text style={[styles.signUpBtnTxt,{fontSize:windowWidth*0.05}]}>SignUp</Text> : 
+                    <ActivityIndicator size="large" color="white" style={{position:'absolute'}}/>}
+                </TouchableOpacity>
                 
                 <Text style={{fontSize:windowWidth*0.04,marginTop:windowWidth*0.04,alignSelf:'center',fontWeight:'bold'}}>forgot password ?</Text>
 
@@ -105,8 +167,10 @@ const AuthScreen:FC = () => {
                 />
                 </View>
 
-                <TouchableOpacity style={[styles.signUpBtn,{borderRadius:windowWidth*0.03,marginTop:windowWidth*0.15,height:windowWidth*0.15}]}>
-                    <Text style={[styles.signUpBtnTxt,{fontSize:windowWidth*0.05}]}>Login</Text></TouchableOpacity>
+                <TouchableOpacity onPress={handleLogin} style={[styles.signUpBtn,{borderRadius:windowWidth*0.03,marginTop:windowWidth*0.15,height:windowWidth*0.15}]}>
+                    {loadingL === true ?<Text style={[styles.signUpBtnTxt,{fontSize:windowWidth*0.05}]}>Login</Text>:
+                    <ActivityIndicator size="large" color="white" style={{position:'absolute'}}/>}
+                </TouchableOpacity>
                 
                 </View>
                 )

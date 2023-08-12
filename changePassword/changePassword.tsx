@@ -1,6 +1,8 @@
 import styles from "../auth/authstyles";
-import { View,Text,Image,Dimensions,TouchableWithoutFeedback,ScrollView,TouchableOpacity,TextInput,ImageBackground,Keyboard, KeyboardAvoidingView,SafeAreaView } from 'react-native';
+import { View,Text,Image,Dimensions,ScrollView,TouchableOpacity,TextInput,SafeAreaView,ActivityIndicator } from 'react-native';
 import React, { FC, useState } from 'react';
+import AuthApi from "../api/authApp";
+import axios from "axios";
 
 const ChangePassword:FC = () => {
     const windowWidth:number = Dimensions.get('window').width;
@@ -11,6 +13,33 @@ const ChangePassword:FC = () => {
     const [tokenVisible,setTokenVisible] = useState(true)
     const togglePasswordVisibility = () => setPasswordVisible(!passwordVisible)
     const toggleTokenVisibility = () => setTokenVisible(!tokenVisible)
+    const [loading,setLoading] = useState(true)
+    const Api = new AuthApi()
+
+    const submit = async() => {
+        if ( !email || !newPassword || !token){
+            console.log('fields cant be empty')
+            return
+        }
+
+        const formData = {email,newPassword,token}
+        try{
+            console.log(formData);
+            setLoading(false)
+            const response = await Api.ChangePassword(formData)
+            console.log(response.data);
+            setEmail('')  
+            setToken('')
+            setNewPassword('')  
+            setLoading(true)
+        }catch(err){
+            if (axios.isAxiosError(err)) {
+                console.log(err.response?.data);
+                setLoading(true)
+              }
+        }
+    }
+
 return (
     <SafeAreaView style={[styles.container,{justifyContent:'center'}]}>
         
@@ -62,8 +91,9 @@ return (
             </View>
 
 
-            <TouchableOpacity style={[styles.signUpBtn,{borderRadius:windowWidth*0.03,marginTop:windowWidth*0.1,height:windowWidth*0.15}]}>
-                <Text style={[styles.signUpBtnTxt,{fontSize:windowWidth*0.05}]}>Submit</Text>
+            <TouchableOpacity onPress={submit} style={[styles.signUpBtn,{borderRadius:windowWidth*0.03,marginTop:windowWidth*0.1,height:windowWidth*0.15}]}>
+                {loading?<Text style={[styles.signUpBtnTxt,{fontSize:windowWidth*0.05}]}>Submit</Text>:
+                <ActivityIndicator size="large" color="white" style={{position:'absolute'}}/>}
             </TouchableOpacity>
 
             </View>
