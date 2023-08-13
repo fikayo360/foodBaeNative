@@ -7,12 +7,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import axios from 'axios';
 import Home from './home/home';
+import CategoryScreen from './categoryScreen/category';
 axios.defaults.baseURL = 'https://food-lpc9.onrender.com/';
 
 export default function App() {
   const Stack = createStackNavigator();
   return (
-    <Home />
+    <CategoryScreen />
     // <NavigationContainer>
     //   <Stack.Navigator initialRouteName="Splash">
     //   <Stack.Screen
