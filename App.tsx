@@ -13,7 +13,7 @@ axios.defaults.baseURL = 'https://food-lpc9.onrender.com/';
 export default function App() {
   const Stack = createStackNavigator();
   return (
-    <CategoryScreen />
+    <Home/>
     // <NavigationContainer>
     //   <Stack.Navigator initialRouteName="Splash">
     //   <Stack.Screen
