@@ -9,12 +9,13 @@ import axios from 'axios';
 import Home from './home/home';
 import CategoryScreen from './categoryScreen/category';
 import SingleFood from './singleFood/singleFood';
+import CartScreen from './cart/cartScreen';
 axios.defaults.baseURL = 'https://food-lpc9.onrender.com/';
 
 export default function App() {
   const Stack = createStackNavigator();
   return (
-    <SingleFood/>
+    <CartScreen/>
     // <NavigationContainer>
     //   <Stack.Navigator initialRouteName="Splash">
     //   <Stack.Screen
