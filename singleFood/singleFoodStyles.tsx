@@ -9,6 +9,10 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center'
+    },
+    infoContainer:{
+        width:'98%',
+        alignSelf:'center'
     }
 })
 
