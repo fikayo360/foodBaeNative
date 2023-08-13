@@ -84,6 +84,42 @@ const CartScreen = ( ) => {
             </View>
             </View>
 
+            <View style={[styles.cartItems,{paddingHorizontal:windowWidth*0.03,height:windowWidth*0.23,borderRadius:windowWidth*0.03,marginBottom:windowWidth*0.03}]}>
+            <Image style={{width:windowWidth*0.15, height:windowWidth*0.15,borderRadius:windowWidth*0.5,marginRight:windowWidth*0.03}} source={require('../assets/p1.jpg')}  />
+            <View style={{marginRight:windowWidth*0.13}}>
+                <Text style={{fontSize:windowWidth*0.05}}>Foodname</Text>
+                <Text style={{fontSize:windowWidth*0.04}}>1,200</Text>
+            </View>
+            <View style={{borderColor:'black',borderWidth:0.5,flexDirection:'row',alignItems:'center',
+            width:windowWidth*0.3,height:windowWidth*0.13,justifyContent:'space-between',paddingHorizontal:windowWidth*0.015,borderRadius:windowWidth*0.047}}>
+                <TouchableOpacity>
+                <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/plus.png')}  />
+                </TouchableOpacity>
+                <Text style={{fontSize:windowWidth*0.04}}>3</Text>
+                <TouchableOpacity>
+                <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/minus.png')}  />
+                </TouchableOpacity>
+            </View>
+            </View>
+
+            <View style={[styles.cartItems,{paddingHorizontal:windowWidth*0.03,height:windowWidth*0.23,borderRadius:windowWidth*0.03,marginBottom:windowWidth*0.03}]}>
+            <Image style={{width:windowWidth*0.15, height:windowWidth*0.15,borderRadius:windowWidth*0.5,marginRight:windowWidth*0.03}} source={require('../assets/p1.jpg')}  />
+            <View style={{marginRight:windowWidth*0.13}}>
+                <Text style={{fontSize:windowWidth*0.05}}>Foodname</Text>
+                <Text style={{fontSize:windowWidth*0.04}}>1,200</Text>
+            </View>
+            <View style={{borderColor:'black',borderWidth:0.5,flexDirection:'row',alignItems:'center',
+            width:windowWidth*0.3,height:windowWidth*0.13,justifyContent:'space-between',paddingHorizontal:windowWidth*0.015,borderRadius:windowWidth*0.047}}>
+                <TouchableOpacity>
+                <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/plus.png')}  />
+                </TouchableOpacity>
+                <Text style={{fontSize:windowWidth*0.04}}>3</Text>
+                <TouchableOpacity>
+                <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/minus.png')}  />
+                </TouchableOpacity>
+            </View>
+            </View>
+
             
 
         </View>
@@ -93,7 +129,7 @@ const CartScreen = ( ) => {
             <Text style={{fontSize:windowWidth*0.06}}>24000</Text>
         </View>
 
-        <TouchableOpacity style={[styles.btn,{height:windowWidth*0.20,borderRadius:windowWidth*0.03,paddingHorizontal:windowWidth*0.03}]}>
+        <TouchableOpacity style={[styles.btn,{height:windowWidth*0.20,borderRadius:windowWidth*0.03,paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.06}]}>
             <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',color:'white'}}>Checkout</Text>
             <Text style={{fontSize:windowWidth*0.06,color:'white'}}>24000</Text>
         </TouchableOpacity>
