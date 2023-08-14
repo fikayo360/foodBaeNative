@@ -8,7 +8,6 @@ interface User {
 }
 
 interface AppContextType {
-  
   currentUser: User;
   setCurrentUser: (user: User) => void;
   login: (user: User, token: string) => void;
@@ -27,18 +26,15 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
    
     const login = (user: User, token: string) => {
       setCurrentUser(user);
-     
     };
   
     const logout = () => {
-      setCurrentUser({  id: '',email:'', username: '',profile_pic:''  });
-     
+      setCurrentUser({  id: '',email:'', username: '',profile_pic:''  });   
     };
    
     return (
       <AppContext.Provider
         value={{
-        
           currentUser,
           setCurrentUser,
           login,

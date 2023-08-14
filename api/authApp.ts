@@ -38,7 +38,6 @@ class AuthApi {
 
      ChangePassword(data:changePasswordData){
         return axios.post('api/v1/user/changePassword',data)
-            
 }
 }
 

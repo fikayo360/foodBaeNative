@@ -1,11 +1,22 @@
 import styles from "./categoryStyle";
 import React, { FC } from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { View,Text,Image,Dimensions,TouchableWithoutFeedback,ScrollView,TouchableOpacity,TextInput,ActivityIndicator,SafeAreaView} from 'react-native';
 import FoodCategoryItem from "../components/foodCategoryItem";
 import FoodItems from '../mocks/foodCategoryItem';
+import CategoryApi from "../api/categories";
 
 const CategoryScreen = () => {
+    const [it,setIt] = useState([])
+    const categoryApi = new CategoryApi()
+    const getCategories = () => {
+        try{
+
+        }catch(err){
+            
+        }
+    }
+
     const windowWidth = Dimensions.get('window').width
     return (
     <SafeAreaView style={[styles.container,{paddingTop:windowWidth*0.1}]}>
