@@ -31,7 +31,8 @@ interface AppContextType {
   address:string;
   setNewAddress :(newAddress: string) => void;
   totalValue:number;
-  updateQuantity:(productTitle:string) => void
+  updateQuantity:(productTitle:string) => void;
+  deleteQuantity:(productTitle:string) => void
 }
 
 
@@ -91,6 +92,19 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       setCartItems(updatedData);
     };
 
+    const deleteQuantity = (productTitle:string) => {
+      const updatedData = cartItems.map(item => {
+        if (item.title === productTitle) {
+          return {
+            ...item,
+            count: item.quantity - 1,
+          };
+        }
+        return item;
+      });
+      setCartItems(updatedData);
+    };
+
     return (
       <AppContext.Provider
         value={{
@@ -104,7 +118,8 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
           address,
           setNewAddress,
           totalValue,
-          updateQuantity
+          updateQuantity,
+          deleteQuantity
         }}
       >
         {children}
