@@ -10,8 +10,12 @@ const SingleFood = ({route}:any) => {
     const {cartItems,addToCart,removeFromCart} = useApp()
     const windowWidth = Dimensions.get('window').width
     const {foodData} = route.params
+    const updatedFoodData = {
+        ...foodData,
+        quantity: 1
+      };
     useEffect(()=>{
-        console.log(foodData);
+        console.log(updatedFoodData);
     },[])
     
     return (
@@ -41,7 +45,7 @@ const SingleFood = ({route}:any) => {
         <Text style={{fontSize:windowWidth*0.05,fontWeight:'bold'}}> category </Text>
         <Text style={{fontSize:windowWidth*0.04,marginBottom:windowWidth*0.04}}> {foodData.category} </Text>
         </View>
-        <TouchableOpacity onPress={() => addToCart(foodData)} 
+        <TouchableOpacity onPress={() => addToCart(updatedFoodData)} 
         style={[styles.btn,{height:windowWidth*0.20,borderRadius:windowWidth*0.03,paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.04}]}>
             <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',color:'white'}}>Add to cart</Text>
         </TouchableOpacity>

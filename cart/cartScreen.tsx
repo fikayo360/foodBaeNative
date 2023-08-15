@@ -1,10 +1,34 @@
 import styles from "./cartScreenStyles";
 import { ScrollView,View,Text,Image,TextInput,Dimensions,TouchableOpacity,SafeAreaView } from "react-native"
 import useApp from "../hooks/useApp";
+import { useState,useEffect } from "react";
+
+interface food  {
+    id:string;
+    image:any;
+    title:string;
+    price:number;
+    description:string;
+    category:string;
+    created_at:string;
+    updated_at:string;
+  }
 
 const CartScreen = ( ) => {
+   
     const windowWidth = Dimensions.get('window').width
     const {cartItems,addToCart,removeFromCart} = useApp()
+    const [items,setItems] = useState<food[]>([])
+
+    useEffect(() => {
+        setItems([...cartItems]);
+        console.log(items);
+      }, [cartItems]); 
+
+      const removeItemfromCart = (title:string) => {
+         removeFromCart(title)
+         setItems(items.filter(item => item.title === title))
+      }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -33,22 +57,25 @@ const CartScreen = ( ) => {
         <View style={[styles.itemsContainer,{paddingLeft:windowWidth*0.015,marginBottom:windowWidth*0.05}]}>
             <Text style={{fontSize:windowWidth*0.05,fontWeight:'bold',marginBottom:windowWidth*0.03,}}>Items</Text>
 
-            {cartItems && cartItems.map((item,index)=> (
+            {items && items.map((item,index)=> (
                 
-                 <View key={index.toString()} style={[styles.cartItems,{paddingHorizontal:windowWidth*0.03,height:windowWidth*0.23,borderRadius:windowWidth*0.03,marginBottom:windowWidth*0.03}]}>
+                 <View key={index.toString()} style={[styles.cartItems,{paddingHorizontal:windowWidth*0.03,height:windowWidth*0.23,borderRadius:windowWidth*0.03,marginBottom:windowWidth*0.07}]}>
+                 <TouchableOpacity onPress={() => removeFromCart(item.title)} style={{width:windowWidth*0.10, height:windowWidth*0.10,position:'absolute',right:'-3%',top:'-23%',justifyContent:'center',alignItems:'center'}}>
+                    <Image style={[{width:'60%', height:'60%',borderRadius:windowWidth*0.5}]} source={require('../assets/close.png')}  />
+                </TouchableOpacity>
                  <Image style={{width:windowWidth*0.15, height:windowWidth*0.15,borderRadius:windowWidth*0.5,marginRight:windowWidth*0.03}} source={{uri:item.image}}/> 
                  <View style={{marginRight:windowWidth*0.13}}>
                      <Text style={{fontSize:windowWidth*0.05}}>{item.title}</Text>
                      <Text style={{fontSize:windowWidth*0.04}}>{item.price}</Text>
                  </View>
-                 <View style={{marginLeft:windowWidth*0.1,borderColor:'black',borderWidth:0.5,flexDirection:'row',alignItems:'center',
-                 width:windowWidth*0.3,height:windowWidth*0.13,justifyContent:'space-between',paddingHorizontal:windowWidth*0.015,borderRadius:windowWidth*0.047}}>
+                 <View style={{borderColor:'black',borderWidth:0.5,flexDirection:'row',alignItems:'center',
+                 width:windowWidth*0.25,height:windowWidth*0.11,justifyContent:'space-between',paddingHorizontal:windowWidth*0.017,borderRadius:windowWidth*0.047,position:'absolute',top:'20%',right:10}}>
                      <TouchableOpacity>
-                     <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/plus.png')}  />
+                     <Image style={{width:windowWidth*0.04, height:windowWidth*0.04,borderRadius:windowWidth*0.5}} source={require('../assets/plus.png')}  />
                      </TouchableOpacity>
                      <Text style={{fontSize:windowWidth*0.04}}>3</Text>
                      <TouchableOpacity>
-                     <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/minus.png')}  />
+                     <Image style={{width:windowWidth*0.04, height:windowWidth*0.04,borderRadius:windowWidth*0.5}} source={require('../assets/minus.png')}  />
                      </TouchableOpacity>
                  </View>
                  </View>
