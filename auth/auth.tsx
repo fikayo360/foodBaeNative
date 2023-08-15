@@ -1,10 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useState } from 'react';
 import { View,Text,Image,Dimensions,TouchableWithoutFeedback,ScrollView,TouchableOpacity,TextInput,ActivityIndicator,SafeAreaView } from 'react-native';
 import styles from './authstyles'
 import AuthApi from '../api/authApp';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import useApp from '../hooks/useApp';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { storeToken,getToken,removeToken } from '../utils/tokenStorage';
 import * as Font from 'expo-font'; 
 
 const AuthScreen:FC = () => {
@@ -21,6 +24,14 @@ const AuthScreen:FC = () => {
     const [loadingL,setLoadingL] = useState(true)
     const Api = new AuthApi()
     const navigation = useNavigation();
+    const  { currentUser, setCurrentUser,login, logout } = useApp()
+    
+    const remtoken = async() => {
+        await removeToken()
+        let cooki = await getToken()
+        console.log(cooki);
+        logout()
+    }
 
     const handleSignup = async() => {
         if (!username || !email || !password){
@@ -61,8 +72,12 @@ const AuthScreen:FC = () => {
         try{
             setLoadingL(false)
             const response = await Api.Login(loginData)
-            console.log(response.data);
-            //navigation.navigate('home')
+            const {id,email,username,profile_pic} = response.data.user
+            const user = {id,email,username,profile_pic}
+            const token = response.data.cookie
+            console.log(user,token);
+            login(user,token)
+            navigation.navigate('Home')
             setLoadingL(true)
             setLusername('')
             setLpassword('')
@@ -133,7 +148,7 @@ const AuthScreen:FC = () => {
                 />     
                 </View>
 
-                <TouchableOpacity onPress={handleSignup} style={[styles.signUpBtn,{borderRadius:windowWidth*0.03,marginTop:windowWidth*0.2,height:windowWidth*0.15}]}>
+                <TouchableOpacity onPress={remtoken} style={[styles.signUpBtn,{borderRadius:windowWidth*0.03,marginTop:windowWidth*0.2,height:windowWidth*0.15}]}>
                     {loading?<Text style={[styles.signUpBtnTxt,{fontSize:windowWidth*0.05}]}>SignUp</Text> : 
                     <ActivityIndicator size="large" color="white" style={{position:'absolute'}}/>}
                 </TouchableOpacity>

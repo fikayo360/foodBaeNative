@@ -5,7 +5,7 @@ interface catData {
 }
 class CategoryApi {
     public getCategories(foodCategory:catData){
-        return axios.post(`api/v1/user/signup/${foodCategory}`)
+        return axios.get(`api/v1/food/allFood/${foodCategory}`)
     }
 }
 

@@ -13,7 +13,17 @@ const styles = StyleSheet.create({
     infoContainer:{
         width:'98%',
         alignSelf:'center'
-    }
+    },
+    btn:{
+        width:'95%',
+        alignSelf:'center',
+        alignItems:'center',
+        flexDirection:'row',
+        justifyContent:'center',
+        borderColor:'black',
+        borderWidth:1,
+        backgroundColor:'#002642'
+      }
 })
 
 export default styles

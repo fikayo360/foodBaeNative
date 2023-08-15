@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { View,Image,Text,Dimensions,TouchableOpacity } from 'react-native';
 import styles from '../componentStyles/categoryStyles';
+import { useNavigation } from '@react-navigation/native';
 
 type category = {
     name:string;
@@ -9,8 +10,13 @@ type category = {
 interface PopularProps {
     data: category;
   };
+
+
 const Category = ({data}:PopularProps) => {
+    const navigation = useNavigation();
     const windowWidth = Dimensions.get('window').width
+
+
     return(
         <View style={[styles.container,{width:windowWidth*0.95,height:windowWidth*0.7,marginBottom:windowWidth*0.05}]}>
             <View style={styles.top}>
@@ -19,7 +25,7 @@ const Category = ({data}:PopularProps) => {
             </View>
             <View style={[styles.bottom,{paddingHorizontal:windowWidth*0.03}]}>
                 <Text style={{fontSize:windowWidth*0.05,fontWeight:'bold'}}>{data.name}</Text>
-                <TouchableOpacity style={[styles.arrowBox,{width:windowWidth*0.2,height:windowWidth*0.08}]}> 
+                <TouchableOpacity onPress={()=>navigation.navigate('CategoryScreen',{catName:data.name})} style={[styles.arrowBox,{width:windowWidth*0.2,height:windowWidth*0.08}]}> 
                     <Image style={{width:windowWidth*0.06, height:windowWidth*0.06}} source={require('../assets/right.png')}  />
                 </TouchableOpacity>
             </View>

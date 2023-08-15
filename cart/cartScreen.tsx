@@ -1,8 +1,11 @@
 import styles from "./cartScreenStyles";
 import { ScrollView,View,Text,Image,TextInput,Dimensions,TouchableOpacity,SafeAreaView } from "react-native"
+import useApp from "../hooks/useApp";
 
 const CartScreen = ( ) => {
     const windowWidth = Dimensions.get('window').width
+    const {cartItems,addToCart,removeFromCart} = useApp()
+
     return (
         <SafeAreaView style={styles.container}>
         <ScrollView style={{flex:1}}>
@@ -30,97 +33,28 @@ const CartScreen = ( ) => {
         <View style={[styles.itemsContainer,{paddingLeft:windowWidth*0.015,marginBottom:windowWidth*0.05}]}>
             <Text style={{fontSize:windowWidth*0.05,fontWeight:'bold',marginBottom:windowWidth*0.03,}}>Items</Text>
 
-            <View style={[styles.cartItems,{paddingHorizontal:windowWidth*0.03,height:windowWidth*0.23,borderRadius:windowWidth*0.03,marginBottom:windowWidth*0.03}]}>
-            <Image style={{width:windowWidth*0.15, height:windowWidth*0.15,borderRadius:windowWidth*0.5,marginRight:windowWidth*0.03}} source={require('../assets/p1.jpg')}  />
-            <View style={{marginRight:windowWidth*0.13}}>
-                <Text style={{fontSize:windowWidth*0.05}}>Foodname</Text>
-                <Text style={{fontSize:windowWidth*0.04}}>1,200</Text>
-            </View>
-            <View style={{borderColor:'black',borderWidth:0.5,flexDirection:'row',alignItems:'center',
-            width:windowWidth*0.3,height:windowWidth*0.13,justifyContent:'space-between',paddingHorizontal:windowWidth*0.015,borderRadius:windowWidth*0.047}}>
-                <TouchableOpacity>
-                <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/plus.png')}  />
-                </TouchableOpacity>
-                <Text style={{fontSize:windowWidth*0.04}}>3</Text>
-                <TouchableOpacity>
-                <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/minus.png')}  />
-                </TouchableOpacity>
-            </View>
-            </View>
+            {cartItems && cartItems.map((item,index)=> (
+                
+                 <View key={index.toString()} style={[styles.cartItems,{paddingHorizontal:windowWidth*0.03,height:windowWidth*0.23,borderRadius:windowWidth*0.03,marginBottom:windowWidth*0.03}]}>
+                 <Image style={{width:windowWidth*0.15, height:windowWidth*0.15,borderRadius:windowWidth*0.5,marginRight:windowWidth*0.03}} source={{uri:item.image}}/> 
+                 <View style={{marginRight:windowWidth*0.13}}>
+                     <Text style={{fontSize:windowWidth*0.05}}>{item.title}</Text>
+                     <Text style={{fontSize:windowWidth*0.04}}>{item.price}</Text>
+                 </View>
+                 <View style={{marginLeft:windowWidth*0.1,borderColor:'black',borderWidth:0.5,flexDirection:'row',alignItems:'center',
+                 width:windowWidth*0.3,height:windowWidth*0.13,justifyContent:'space-between',paddingHorizontal:windowWidth*0.015,borderRadius:windowWidth*0.047}}>
+                     <TouchableOpacity>
+                     <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/plus.png')}  />
+                     </TouchableOpacity>
+                     <Text style={{fontSize:windowWidth*0.04}}>3</Text>
+                     <TouchableOpacity>
+                     <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/minus.png')}  />
+                     </TouchableOpacity>
+                 </View>
+                 </View>
+            ))}
 
-            <View style={[styles.cartItems,{paddingHorizontal:windowWidth*0.03,height:windowWidth*0.23,borderRadius:windowWidth*0.03,marginBottom:windowWidth*0.03}]}>
-            <Image style={{width:windowWidth*0.15, height:windowWidth*0.15,borderRadius:windowWidth*0.5,marginRight:windowWidth*0.03}} source={require('../assets/p1.jpg')}  />
-            <View style={{marginRight:windowWidth*0.13}}>
-                <Text style={{fontSize:windowWidth*0.05}}>Foodname</Text>
-                <Text style={{fontSize:windowWidth*0.04}}>1,200</Text>
-            </View>
-            <View style={{borderColor:'black',borderWidth:0.5,flexDirection:'row',alignItems:'center',
-            width:windowWidth*0.3,height:windowWidth*0.13,justifyContent:'space-between',paddingHorizontal:windowWidth*0.015,borderRadius:windowWidth*0.047}}>
-                <TouchableOpacity>
-                <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/plus.png')}  />
-                </TouchableOpacity>
-                <Text style={{fontSize:windowWidth*0.04}}>3</Text>
-                <TouchableOpacity>
-                <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/minus.png')}  />
-                </TouchableOpacity>
-            </View>
-            </View>
-
-            <View style={[styles.cartItems,{paddingHorizontal:windowWidth*0.03,height:windowWidth*0.23,borderRadius:windowWidth*0.03,marginBottom:windowWidth*0.03}]}>
-            <Image style={{width:windowWidth*0.15, height:windowWidth*0.15,borderRadius:windowWidth*0.5,marginRight:windowWidth*0.03}} source={require('../assets/p1.jpg')}  />
-            <View style={{marginRight:windowWidth*0.13}}>
-                <Text style={{fontSize:windowWidth*0.05}}>Foodname</Text>
-                <Text style={{fontSize:windowWidth*0.04}}>1,200</Text>
-            </View>
-            <View style={{borderColor:'black',borderWidth:0.5,flexDirection:'row',alignItems:'center',
-            width:windowWidth*0.3,height:windowWidth*0.13,justifyContent:'space-between',paddingHorizontal:windowWidth*0.015,borderRadius:windowWidth*0.047}}>
-                <TouchableOpacity>
-                <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/plus.png')}  />
-                </TouchableOpacity>
-                <Text style={{fontSize:windowWidth*0.04}}>3</Text>
-                <TouchableOpacity>
-                <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/minus.png')}  />
-                </TouchableOpacity>
-            </View>
-            </View>
-
-            <View style={[styles.cartItems,{paddingHorizontal:windowWidth*0.03,height:windowWidth*0.23,borderRadius:windowWidth*0.03,marginBottom:windowWidth*0.03}]}>
-            <Image style={{width:windowWidth*0.15, height:windowWidth*0.15,borderRadius:windowWidth*0.5,marginRight:windowWidth*0.03}} source={require('../assets/p1.jpg')}  />
-            <View style={{marginRight:windowWidth*0.13}}>
-                <Text style={{fontSize:windowWidth*0.05}}>Foodname</Text>
-                <Text style={{fontSize:windowWidth*0.04}}>1,200</Text>
-            </View>
-            <View style={{borderColor:'black',borderWidth:0.5,flexDirection:'row',alignItems:'center',
-            width:windowWidth*0.3,height:windowWidth*0.13,justifyContent:'space-between',paddingHorizontal:windowWidth*0.015,borderRadius:windowWidth*0.047}}>
-                <TouchableOpacity>
-                <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/plus.png')}  />
-                </TouchableOpacity>
-                <Text style={{fontSize:windowWidth*0.04}}>3</Text>
-                <TouchableOpacity>
-                <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/minus.png')}  />
-                </TouchableOpacity>
-            </View>
-            </View>
-
-            <View style={[styles.cartItems,{paddingHorizontal:windowWidth*0.03,height:windowWidth*0.23,borderRadius:windowWidth*0.03,marginBottom:windowWidth*0.03}]}>
-            <Image style={{width:windowWidth*0.15, height:windowWidth*0.15,borderRadius:windowWidth*0.5,marginRight:windowWidth*0.03}} source={require('../assets/p1.jpg')}  />
-            <View style={{marginRight:windowWidth*0.13}}>
-                <Text style={{fontSize:windowWidth*0.05}}>Foodname</Text>
-                <Text style={{fontSize:windowWidth*0.04}}>1,200</Text>
-            </View>
-            <View style={{borderColor:'black',borderWidth:0.5,flexDirection:'row',alignItems:'center',
-            width:windowWidth*0.3,height:windowWidth*0.13,justifyContent:'space-between',paddingHorizontal:windowWidth*0.015,borderRadius:windowWidth*0.047}}>
-                <TouchableOpacity>
-                <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/plus.png')}  />
-                </TouchableOpacity>
-                <Text style={{fontSize:windowWidth*0.04}}>3</Text>
-                <TouchableOpacity>
-                <Image style={{width:windowWidth*0.06, height:windowWidth*0.06,borderRadius:windowWidth*0.5}} source={require('../assets/minus.png')}  />
-                </TouchableOpacity>
-            </View>
-            </View>
-
-            
+          
 
         </View>
 

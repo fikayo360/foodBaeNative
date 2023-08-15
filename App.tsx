@@ -17,21 +17,25 @@ export default function App() {
   const Stack = createStackNavigator();
   return (
     <AppProvider>
-      <CartScreen/>
+       <NavigationContainer>
+      <Stack.Navigator initialRouteName="Splash">
+      <Stack.Screen
+          name="Splash"
+          component={SplashSreen}
+          options={{ headerShown: false,gestureEnabled: false }}
+        />
+        <Stack.Screen name="Auth" component={AuthScreen} options={{ headerShown: false,gestureEnabled: false }}/>
+        <Stack.Screen name="forgotPassword" component={ForgotPassword} options={{ headerShown: false,gestureEnabled: false }}/>
+        <Stack.Screen name="changePassword" component={ChangePassword} options={{ headerShown: false,gestureEnabled: false }}/>
+        <Stack.Screen name="Home" component={Home} options={{ headerShown: false,gestureEnabled: false }}/>
+        <Stack.Screen name="CategoryScreen" component={CategoryScreen} options={{ headerShown: false,gestureEnabled: false }}/>
+        <Stack.Screen name="SingleFood" component={SingleFood} options={{ headerShown: false,gestureEnabled: false }}/>
+        <Stack.Screen name="CartScreen" component={CartScreen} options={{ headerShown: false,gestureEnabled: false }}/>
+      </Stack.Navigator>
+    </NavigationContainer>
     </AppProvider>
     
-    // <NavigationContainer>
-    //   <Stack.Navigator initialRouteName="Splash">
-    //   <Stack.Screen
-    //       name="Splash"
-    //       component={SplashSreen}
-    //       options={{ headerShown: false,gestureEnabled: false }}
-    //     />
-    //     <Stack.Screen name="Auth" component={AuthScreen} options={{ headerShown: false,gestureEnabled: false }}/>
-    //     <Stack.Screen name="forgotPassword" component={ForgotPassword} options={{ headerShown: false,gestureEnabled: false }}/>
-    //     <Stack.Screen name="changePassword" component={ChangePassword} options={{ headerShown: false,gestureEnabled: false }}/>
-    //   </Stack.Navigator>
-    // </NavigationContainer>
+   
   );
 }
 
