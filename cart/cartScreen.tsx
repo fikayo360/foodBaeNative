@@ -1,7 +1,7 @@
 import styles from "./cartScreenStyles";
 import { ScrollView,View,Text,Image,TextInput,Dimensions,TouchableOpacity,SafeAreaView } from "react-native"
 import useApp from "../hooks/useApp";
-import { useState,useEffect } from "react";
+import { useState,useEffect,useCallback } from "react";
 
 interface food  {
     id:string;
@@ -18,7 +18,7 @@ interface food  {
 const CartScreen = ( ) => {
    
     const windowWidth = Dimensions.get('window').width
-    const {cartItems,addToCart,removeFromCart,updateQuantity,deleteQuantity} = useApp()
+    const {cartItems,addToCart,removeFromCart,updateQuantity,deleteQuantity,setTottalValue} = useApp()
     const [items,setItems] = useState<food[]>([])
 
     const removeItemfromCart = (title:string) => {
@@ -36,11 +36,19 @@ const CartScreen = ( ) => {
        console.log('1 subtracted ');
      }
 
+     const totalItemsCost = useCallback(() => {
+        const totalSum = cartItems.reduce((acc, currentValue) => acc + currentValue.price * currentValue.quantity, 0)
+        setTottalValue(totalSum)
+      },[cartItems])
+
     useEffect(() => {
         setItems([...cartItems]);
         console.log(items);
-      }, [cartItems,increaseCount,decreaseCount]); 
-
+      }, [cartItems]); 
+      
+    useEffect(()=> {
+        totalItemsCost()
+    },[cartItems])
     
 
     return (
@@ -84,11 +92,11 @@ const CartScreen = ( ) => {
                  <View style={{borderColor:'black',borderWidth:0.5,flexDirection:'row',alignItems:'center',
                  width:windowWidth*0.25,height:windowWidth*0.11,justifyContent:'space-between',paddingHorizontal:windowWidth*0.017,borderRadius:windowWidth*0.047,position:'absolute',top:'20%',right:10}}>
                      <TouchableOpacity onPress={() => increaseCount(item.title)}>
-                     <Image style={{width:windowWidth*0.04, height:windowWidth*0.04,borderRadius:windowWidth*0.5}} source={require('../assets/plus.png')}  />
+                     <Image style={{width:windowWidth*0.05, height:windowWidth*0.05,borderRadius:windowWidth*0.5}} source={require('../assets/plus.png')}  />
                      </TouchableOpacity>
                      <Text style={{fontSize:windowWidth*0.04}}>{item.quantity}</Text>
                      <TouchableOpacity onPress={() => decreaseCount(item.title)}>
-                     <Image style={{width:windowWidth*0.04, height:windowWidth*0.04,borderRadius:windowWidth*0.5}} source={require('../assets/minus.png')}  />
+                     <Image style={{width:windowWidth*0.05, height:windowWidth*0.05,borderRadius:windowWidth*0.5}} source={require('../assets/minus.png')}  />
                      </TouchableOpacity>
                  </View>
                  </View>
