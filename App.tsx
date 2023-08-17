@@ -13,10 +13,14 @@ import CartScreen from './cart/cartScreen';
 axios.defaults.baseURL = 'https://food-lpc9.onrender.com/';
 
 import { AppProvider } from './appContext';
+import Checkout from './checkout/checkout';
+import Order from './order/order';
+import SingleOrder from './singleOrder/singleOrder';
 
 export default function App() {
   const Stack = createStackNavigator();
   return (
+    
     <AppProvider>
        <NavigationContainer>
       <Stack.Navigator initialRouteName="Splash">
@@ -32,6 +36,9 @@ export default function App() {
         <Stack.Screen name="CategoryScreen" component={CategoryScreen} options={{ headerShown: false,gestureEnabled: false }}/>
         <Stack.Screen name="SingleFood" component={SingleFood} options={{ headerShown: false,gestureEnabled: false }}/>
         <Stack.Screen name="CartScreen" component={CartScreen} options={{ headerShown: false,gestureEnabled: false }}/>
+        <Stack.Screen name="Checkout" component={Checkout} options={{ headerShown: false,gestureEnabled: false }}/>
+        <Stack.Screen name="Order" component={Order} options={{ headerShown: false,gestureEnabled: false }}/>
+        <Stack.Screen name="singleOrder" component={SingleOrder} options={{ headerShown: false,gestureEnabled: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
     </AppProvider>

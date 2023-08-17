@@ -2,6 +2,7 @@ import styles from "./cartScreenStyles";
 import { ScrollView,View,Text,Image,TextInput,Dimensions,TouchableOpacity,SafeAreaView } from "react-native"
 import useApp from "../hooks/useApp";
 import { useState,useEffect,useCallback } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 
 interface food  {
@@ -17,7 +18,7 @@ interface food  {
   }
 
 const CartScreen = ( ) => {
-   
+    const navigation = useNavigation()
     const windowWidth = Dimensions.get('window').width
     const {cartItems,addToCart,removeFromCart,updateQuantity,deleteQuantity,setTottalValue,totalValue} = useApp()
     const [items,setItems] = useState<food[]>([])
@@ -112,7 +113,7 @@ const CartScreen = ( ) => {
             <Text style={{fontSize:windowWidth*0.06}}>{totalValue}</Text>
         </View>
 
-        <TouchableOpacity style={[styles.btn,{height:windowWidth*0.20,borderRadius:windowWidth*0.03,paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.06}]}>
+        <TouchableOpacity onPress={() => navigation.navigate('Checkout')} style={[styles.btn,{height:windowWidth*0.20,borderRadius:windowWidth*0.03,paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.06}]}>
             <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',color:'white'}}>Checkout</Text>
             <Text style={{fontSize:windowWidth*0.06,color:'white'}}>{totalValue}</Text>
         </TouchableOpacity>

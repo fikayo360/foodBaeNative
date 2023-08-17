@@ -49,14 +49,12 @@ const Home:FC = () => {
       }
 
     const searchForFood = async () => {
-
         try{
             if (!name){
                 setError('fields cannot be empty')
                 setLoading(false)
                 return
             }
-            
             setLoading(true)
             const response = await homeApi.searchFood(name)
             setLoading(false)
