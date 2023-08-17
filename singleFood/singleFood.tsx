@@ -1,15 +1,17 @@
 import { ScrollView,View,Text,Image,TextInput,Dimensions,TouchableOpacity,SafeAreaView } from "react-native"
 import styles from "./singleFoodStyles"
 import SingleF from "../mocks/singleFood"
-import { useEffect } from "react"
+import { useEffect,useState } from "react"
 import useApp from "../hooks/useApp";
 import { useNavigation } from "@react-navigation/native";
+import NotificationAlert from "../components/notificationComponent";
 
 const SingleFood = ({route}:any) => {
     const navigation = useNavigation()
     const {cartItems,addToCart,removeFromCart} = useApp()
     const windowWidth = Dimensions.get('window').width
     const {foodData} = route.params
+    const [notification,setNotification] = useState("")
     const updatedFoodData = {
         ...foodData,
         quantity: 1
@@ -17,9 +19,19 @@ const SingleFood = ({route}:any) => {
     useEffect(()=>{
         console.log(updatedFoodData);
     },[])
+
+    const addItemsCart = () => {
+         addToCart(updatedFoodData)
+         setNotification('item added')
+    }
+
+    const clearNotification = () => {
+        setNotification("")
+      }
     
     return (
         <SafeAreaView style={styles.container}>
+         {notification !== "" && (<NotificationAlert text={notification} clearNotification={clearNotification}/>)}
         <View style={[styles.header,{paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.01,paddingVertical:windowWidth*0.08}]}>
         <TouchableOpacity>
         <Image style={{width:windowWidth*0.07, height:windowWidth*0.07,borderRadius:windowWidth*0.5}} source={require('../assets/left.png')}  />
@@ -45,7 +57,7 @@ const SingleFood = ({route}:any) => {
         <Text style={{fontSize:windowWidth*0.05,fontWeight:'bold'}}> category </Text>
         <Text style={{fontSize:windowWidth*0.04,marginBottom:windowWidth*0.04}}> {foodData.category} </Text>
         </View>
-        <TouchableOpacity onPress={() => addToCart(updatedFoodData)} 
+        <TouchableOpacity onPress={addItemsCart} 
         style={[styles.btn,{height:windowWidth*0.20,borderRadius:windowWidth*0.03,paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.04}]}>
             <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',color:'white'}}>Add to cart</Text>
         </TouchableOpacity>

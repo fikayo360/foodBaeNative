@@ -11,6 +11,7 @@ import CategoryScreen from './categoryScreen/category';
 import SingleFood from './singleFood/singleFood';
 import CartScreen from './cart/cartScreen';
 axios.defaults.baseURL = 'https://food-lpc9.onrender.com/';
+
 import { AppProvider } from './appContext';
 
 export default function App() {

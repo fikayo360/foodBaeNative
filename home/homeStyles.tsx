@@ -27,7 +27,13 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         alignItems:'center',
         borderColor:'black',
-        borderWidth:0.5
+        borderWidth:0.5,
+        justifyContent:'space-between'
+    },
+    foundItem:{
+        width:'96%',
+        alignSelf:'center',
+        flexDirection:'column'
     },
     popularContainer:{
         width:'96%',

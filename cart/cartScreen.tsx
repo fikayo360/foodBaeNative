@@ -3,6 +3,7 @@ import { ScrollView,View,Text,Image,TextInput,Dimensions,TouchableOpacity,SafeAr
 import useApp from "../hooks/useApp";
 import { useState,useEffect,useCallback } from "react";
 
+
 interface food  {
     id:string;
     image:any;
@@ -18,7 +19,7 @@ interface food  {
 const CartScreen = ( ) => {
    
     const windowWidth = Dimensions.get('window').width
-    const {cartItems,addToCart,removeFromCart,updateQuantity,deleteQuantity,setTottalValue} = useApp()
+    const {cartItems,addToCart,removeFromCart,updateQuantity,deleteQuantity,setTottalValue,totalValue} = useApp()
     const [items,setItems] = useState<food[]>([])
 
     const removeItemfromCart = (title:string) => {
@@ -108,12 +109,12 @@ const CartScreen = ( ) => {
 
         <View style={[styles.totalContainer,{paddingHorizontal:windowWidth*0.02,marginBottom:windowWidth*0.05}]}>
             <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold'}}>Total</Text>
-            <Text style={{fontSize:windowWidth*0.06}}>24000</Text>
+            <Text style={{fontSize:windowWidth*0.06}}>{totalValue}</Text>
         </View>
 
         <TouchableOpacity style={[styles.btn,{height:windowWidth*0.20,borderRadius:windowWidth*0.03,paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.06}]}>
             <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',color:'white'}}>Checkout</Text>
-            <Text style={{fontSize:windowWidth*0.06,color:'white'}}>24000</Text>
+            <Text style={{fontSize:windowWidth*0.06,color:'white'}}>{totalValue}</Text>
         </TouchableOpacity>
         </ScrollView>
        

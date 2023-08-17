@@ -8,6 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 import useApp from '../hooks/useApp';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { storeToken,getToken,removeToken } from '../utils/tokenStorage';
+import ErrorComponent from '../components/errorComponent';
+import NotificationAlert from '../components/notificationComponent';
 import * as Font from 'expo-font'; 
 
 const AuthScreen:FC = () => {
@@ -22,9 +24,18 @@ const AuthScreen:FC = () => {
     const togglePasswordVisibility = () => setPasswordVisible(!passwordVisible)
     const [loading,setLoading] = useState(true)
     const [loadingL,setLoadingL] = useState(true)
+    const [error,setError] = useState("")
+    const [notification,setNotification] = useState("")
     const Api = new AuthApi()
     const navigation = useNavigation();
     const  { currentUser, setCurrentUser,login, logout } = useApp()
+
+    const clearError = () => {
+        setError("")
+      }
+      const clearNotification = () => {
+        setNotification("")
+      }
     
     const remtoken = async() => {
         await removeToken()
@@ -36,6 +47,7 @@ const AuthScreen:FC = () => {
     const handleSignup = async() => {
         if (!username || !email || !password){
             console.log('fields cant be empty')
+            setError('fields cant be empty')
             return
         }
 
@@ -47,6 +59,7 @@ const AuthScreen:FC = () => {
             setLoading(false)
             const response = await Api.Signup(formData)
             console.log(response.data);
+            setNotification(`welcome ${username}`)
             setUsername('')
             setEmail('')
             setPassword('')
@@ -63,6 +76,7 @@ const AuthScreen:FC = () => {
     const handleLogin = async() => {
         if (!lusername ||  !lpassword){
             console.log('fields cant be empty')
+            setError('fields cant be empty')
             return
         }
 
@@ -84,6 +98,7 @@ const AuthScreen:FC = () => {
         }catch(err){
             if (axios.isAxiosError(err)) {
                 console.log(err.response?.data);
+                setError(err.response?.data)
                 setLoadingL(true)
                 //return err.response?.data;
               }
@@ -92,6 +107,8 @@ const AuthScreen:FC = () => {
 
     return (
          <SafeAreaView style={styles.container}>
+            {error !== "" && (<ErrorComponent text={error} clearError={clearError}/>)}
+            {notification !== "" && (<NotificationAlert text={notification} clearNotification={clearNotification}/>)}
             <ScrollView contentContainerStyle={{width:'100%',height:'100%',justifyContent:"center",alignItems:'center'}}>
             <View style={[styles.innerContainer,{borderRadius:windowWidth*0.01,width:'95%',height:'90%'}]}>
             

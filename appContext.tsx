@@ -1,6 +1,7 @@
 import React, { useState, createContext, ReactNode } from 'react';
 import api from './utils/axiosConfig';
 import { storeToken } from './utils/tokenStorage';
+import axios from 'axios';
 interface User {
     id:string,
     email: string,
@@ -53,13 +54,13 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     const login = async (user: User, token: string) => {
       setCurrentUser(user);
       await storeToken(token)
-      api.defaults.headers.Authorization = `Bearer ${token}`;
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
       console.log('items saved successfully');
     };
   
     const logout = () => {
       setCurrentUser({  id: '',email:'', username: '',profile_pic:'' });   
-      api.defaults.headers.Authorization = null;
+      axios.defaults.headers.common['Authorization'] = null
     };
 
     const addToCart = (product:food) => {
@@ -98,7 +99,7 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         if (item.title === productTitle) {
           return {
             ...item,
-            quantity: item.quantity - 1,
+            quantity: Math.max(item.quantity - 1, 1),
           };
         }
         return item;
