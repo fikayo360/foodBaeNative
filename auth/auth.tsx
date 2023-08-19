@@ -10,6 +10,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { storeToken,getToken,removeToken } from '../utils/tokenStorage';
 import ErrorComponent from '../components/errorComponent';
 import NotificationAlert from '../components/notificationComponent';
+import { BackHandler } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import * as Font from 'expo-font'; 
 
 const AuthScreen:FC = () => {
@@ -105,6 +107,14 @@ const AuthScreen:FC = () => {
         }
     }
 
+    useFocusEffect(() => {
+        const handleBackPress = () => {
+          return true;
+        };
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+        return () => backHandler.remove();
+      });
+      
     return (
          <SafeAreaView style={styles.container}>
             {error !== "" && (<ErrorComponent text={error} clearError={clearError}/>)}

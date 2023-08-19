@@ -13,6 +13,8 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import ErrorComponent from "../components/errorComponent";
 
+
+
 interface food  {
     id:string;
     image:any;
@@ -35,6 +37,7 @@ interface food  {
         updated_at: ''
     }
   
+    
 const Home:FC = () => {
     const  { currentUser} = useApp()
     const homeApi = new HomeApi()
@@ -43,6 +46,7 @@ const Home:FC = () => {
     const [loading,setLoading] = useState(false)
     const [error,setError] = useState("")
     const navigation = useNavigation()
+
 
     const clearError = () => {
         setError("")
@@ -72,8 +76,12 @@ const Home:FC = () => {
     }
 
     const windowWidth:number = Dimensions.get('window').width;
+
     return (
+        
         <ScrollView style={[styles.container]}>
+            
+
             {error !== "" && (<ErrorComponent text={error} clearError={clearError}/>)}
             {loading && <ActivityIndicator size='large' color="black" style={{position:'absolute',zIndex:2,left:'50%',top:'10%'}}/>}
             <View style={[styles.firstRow,{paddingTop:windowWidth*0.1}]}>
