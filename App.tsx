@@ -24,7 +24,8 @@ export default function App() {
   return (
     
     <AppProvider>
-       <NavigationContainer>
+      <Order/>
+       {/* <NavigationContainer>
       <Stack.Navigator initialRouteName="Splash">
       <Stack.Screen
           name="Splash"
@@ -66,15 +67,15 @@ export default function App() {
         )}
       </Stack.Screen>
 
-    <Stack.Screen name="singleOrder" options={{ headerShown: false,gestureEnabled: false }}>
+    <Stack.Screen name="singleOrder"  options={{ headerShown: false,gestureEnabled: false }}>
     {() => (
-      <AuthWrapper>
-        <SingleOrder />
-      </AuthWrapper>
-    )}
-  </Stack.Screen>
+          <AuthWrapper>
+            <SingleOrder />
+          </AuthWrapper>
+        )}
+      </Stack.Screen>
       </Stack.Navigator>
-    </NavigationContainer>
+    </NavigationContainer> */}
     </AppProvider>
   );
 }

@@ -9,11 +9,12 @@ import { removeToken } from "./utils/tokenStorage";
 import { getToken } from "./utils/tokenStorage";
 import useApp from "./hooks/useApp";
 import { useCallback } from 'react';
+import { useNavigation } from "@react-navigation/native";
 
 const TabBar = () => {
   const windowWidth = Dimensions.get('window').width
   const Tab = createBottomTabNavigator()
- 
+  const navigation = useNavigation()
   const screenOptions = {
     tabBarShowLabel: false,
     headerShown: false,
@@ -33,7 +34,10 @@ const TabBar = () => {
   const remtoken = async() => {
     await removeToken()
     let cooki = await getToken()
-    console.log(cooki);
+    if (cooki === null){
+      navigation.navigate('Auth')
+    }
+    
 }
 
   return (

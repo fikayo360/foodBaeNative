@@ -1,6 +1,6 @@
 import { ScrollView,View,Text,Image,TextInput,Dimensions,TouchableOpacity,ActivityIndicator } from "react-native"
 import styles from "./homeStyles"
-import React, { FC } from 'react';
+import React, { FC ,useEffect} from 'react';
 import Popular from "../components/popular";
 import popularMeals from "../mocks/popular";
 import Category from "../components/category";
@@ -12,7 +12,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import ErrorComponent from "../components/errorComponent";
-
+import { getToken } from "../utils/tokenStorage";
 
 
 interface food  {
@@ -47,7 +47,13 @@ const Home:FC = () => {
     const [error,setError] = useState("")
     const navigation = useNavigation()
 
-
+    useEffect(()=>{
+        const get = async() => {
+            let token = await getToken()
+            console.log((token));
+        }
+        get()
+    },[])
     const clearError = () => {
         setError("")
       }
