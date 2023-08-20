@@ -59,7 +59,7 @@ const SingleOrder = () => {
     }, [userLocation, serverLocation]);
 
     return (
-      <Protected>
+      
         <SafeAreaView style={styles.container}>
         <ScrollView style={{flex:1}}>
         <View style={[styles.header,{paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.01,paddingVertical:windowWidth*0.08,borderBottomWidth:1,borderBottomColor:'black'}]}>
@@ -102,7 +102,7 @@ const SingleOrder = () => {
         </View>
         </ScrollView>
     </SafeAreaView>
-    </Protected>
+   
     )
 }
 

@@ -24,9 +24,9 @@ const TabBar = () => {
       left: 0,
       right: 0,
       elevation: 0,
-      height:'9%',
+      height:'8%',
       width: '100%',
-      backgroundColor: '#FFFFFF',
+      backgroundColor: '#11001C',
       alignItems: 'center'
     },
   } as const;
@@ -35,19 +35,17 @@ const TabBar = () => {
     await removeToken()
     let cooki = await getToken()
     if (cooki === null){
-      navigation.navigate('Auth', { screen: 'Auth' })
+      navigation.navigate('Auth')
     }
 }
 
   return (
-
-    <NavigationContainer independent={true}>
             <Tab.Navigator screenOptions={screenOptions} initialRouteName="home">
                 <Tab.Screen name="home" component={Home} options={{
                  tabBarIcon:({focused})=>{
                   return (
                   <View>
-                    <MaterialCommunityIcons name="home" size={windowWidth*0.08} color={focused?'blue':'black'}/>
+                    <MaterialCommunityIcons name="home" size={windowWidth*0.08} color={focused?'#6153CC':'white'}/>
                   </View>)
                  }
                 }}/>
@@ -56,9 +54,9 @@ const TabBar = () => {
                  tabBarIcon:({focused})=>{
                   return (
                   <View >
-                    <View style={{position:'absolute',top:-windowWidth*0.03,left:windowWidth*0.05,borderColor:'grey',backgroundColor:focused?'blue':'black',borderWidth:1,width:windowWidth*0.065,height:windowWidth*0.065,
-                    borderRadius:windowWidth*0.6,justifyContent:'center',alignItems:'center'}}><Text style={{color:'white',fontSize:windowWidth*0.03,fontWeight:'bold'}}>{0}</Text></View>
-                    <MaterialCommunityIcons name="cart" size={windowWidth*0.08} color={focused?'blue':'black'}/>
+                    <View style={{position:'absolute',top:-windowWidth*0.03,left:windowWidth*0.05,borderColor:'grey',backgroundColor:focused?'#6153CC':'white',borderWidth:1,width:windowWidth*0.065,height:windowWidth*0.065,
+                    borderRadius:windowWidth*0.6,justifyContent:'center',alignItems:'center'}}><Text style={{color:'black',fontSize:windowWidth*0.03,fontWeight:'bold'}}>{0}</Text></View>
+                    <MaterialCommunityIcons name="cart" size={windowWidth*0.08} color={focused?'#6153CC':'white'}/>
                   </View>)
                  }
                 }}/>
@@ -67,7 +65,7 @@ const TabBar = () => {
                  tabBarIcon:({focused})=>{
                   return (
                   <View>
-                    <MaterialCommunityIcons name="shopping" size={windowWidth*0.08} color={focused?'blue':'black'}/>
+                    <MaterialCommunityIcons name="shopping" size={windowWidth*0.08} color={focused?'#6153CC':'white'}/>
                   </View>)
                  }
                 }}/>
@@ -79,13 +77,12 @@ const TabBar = () => {
                  tabBarIcon:({focused})=>{
                   return (
                   <TouchableOpacity onPress={remtoken}>
-                    <MaterialCommunityIcons name="logout" size={windowWidth*0.08} color={focused?'blue':'black'}/>
+                    <MaterialCommunityIcons name="logout" size={windowWidth*0.08} color={focused?'#6153CC':'white'}/>
                   </TouchableOpacity>)
                  }
                 }}
               />
             </Tab.Navigator>
-     </NavigationContainer>
   )
     
 }

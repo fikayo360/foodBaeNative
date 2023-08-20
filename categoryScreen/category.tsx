@@ -42,7 +42,7 @@ const CategoryScreen = ({route}:any) => {
 
     const windowWidth = Dimensions.get('window').width
     return (
-        <Protected>
+       
     <SafeAreaView style={[styles.container,{paddingTop:windowWidth*0.1}]}>
         {loading && <ActivityIndicator size='large' color="black" style={{position:'absolute',top:'30%',left:'50%',zIndex:2}}/>}
         <View style={[styles.header,{paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.05}]}>
@@ -61,7 +61,7 @@ const CategoryScreen = ({route}:any) => {
         </ScrollView>) }
         
     </SafeAreaView>
-    </Protected>
+    
     )
 }
 

@@ -31,7 +31,7 @@ export default function App() {
         <Stack.Screen name="Checkout" component={Checkout} options={{ headerShown: false,gestureEnabled: false }}/>
         <Stack.Screen name="SingleFood" component={SingleFood} options={{ headerShown: false,gestureEnabled: false }}/>
         <Stack.Screen name="CategoryScreen" component={CategoryScreen} options={{ headerShown: false,gestureEnabled: false }}/>
-        <Stack.Screen name="profile" component={Profile} options={{ headerShown: false,gestureEnabled: false }}/>
+        <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false,gestureEnabled: false }}/>
         <Stack.Screen name="tab" component={TabBar} options={{ headerShown: false,gestureEnabled: false }}/>
         <Stack.Screen name="changePassword" component={ChangePassword} options={{ headerShown: false,gestureEnabled: false }}/>
         <Stack.Screen name="forgotPassword" component={ForgotPassword} options={{ headerShown: false,gestureEnabled: false }}/>
