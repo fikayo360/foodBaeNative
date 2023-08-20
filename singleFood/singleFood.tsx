@@ -5,6 +5,7 @@ import { useEffect,useState } from "react"
 import useApp from "../hooks/useApp";
 import { useNavigation } from "@react-navigation/native";
 import NotificationAlert from "../components/notificationComponent";
+import Protected from "../protected";
 
 const SingleFood = ({route}:any) => {
     const navigation = useNavigation()
@@ -30,6 +31,7 @@ const SingleFood = ({route}:any) => {
       }
     
     return (
+        <Protected>
         <SafeAreaView style={styles.container}>
          {notification !== "" && (<NotificationAlert text={notification} clearNotification={clearNotification}/>)}
         <View style={[styles.header,{paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.01,paddingVertical:windowWidth*0.08}]}>
@@ -63,6 +65,7 @@ const SingleFood = ({route}:any) => {
         </TouchableOpacity>
         </ScrollView>
         </SafeAreaView>
+        </Protected>
     )
 }
 

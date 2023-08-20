@@ -2,31 +2,27 @@ import { getToken } from './utils/tokenStorage';
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect,useState } from 'react';
 
-type AuthWrapperProps = {
-  children: React.ReactElement; 
-};
 
-const AuthWrapper:React.FC<AuthWrapperProps> = ({children}) => {
-  const [token, setToken] = useState<string|null|undefined>('');
-  const navigation = useNavigation()
+
+const Protected = ({ children }: any) => {
+  const [token, setToken] = useState<string | undefined | null>('');
+  const navigation = useNavigation();
+
   useEffect(() => {
-    const getTokenOrNavigate = async () => {
-      const fetchedToken = await getToken();
-      setToken(fetchedToken);
-      console.log(fetchedToken);
-
-      if (fetchedToken === null) {
-        navigation.navigate('Auth');
-      }
+    const get = async () => {
+      let fetched = await getToken(); // Replace with the actual token retrieval logic
+      setToken(fetched);
     };
+    get();
+  }, []);
 
-    getTokenOrNavigate();
-  }, [token, navigation]);
-
-  return <>{children}</>;
+  if (token) {
+    return <>{children}</>;
+  } else {
+    navigation.navigate('Auth');
+    return null;
+  }
 };
 
-
-
-  export default AuthWrapper
+  export default Protected
 

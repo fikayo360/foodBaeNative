@@ -6,12 +6,14 @@ import React from 'react';
 import  { Paystack }  from 'react-native-paystack-webview';
 import WebView from "react-native-webview";
 import { useNavigation } from "@react-navigation/native";
+import Protected from "../protected";
 
 const Checkout = () => {
     const windowWidth = Dimensions.get('window').width
     const {currentUser,cartItems,totalValue} = useApp()
     const navigation = useNavigation()
     return (
+        <Protected>
         <SafeAreaView style={styles.container}>
             <ScrollView style={{flex:1}}>
             <View style={[styles.header,{paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.01,paddingVertical:windowWidth*0.08}]}>
@@ -41,6 +43,7 @@ const Checkout = () => {
             </View>
                 </ScrollView>
             </SafeAreaView>
+            </Protected>
     )
 }
 

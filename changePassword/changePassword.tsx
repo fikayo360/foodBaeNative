@@ -4,7 +4,7 @@ import React, { FC, useState } from 'react';
 import AuthApi from "../api/authApp";
 import axios from "axios";
 
-const ChangePassword:FC = () => {
+const ChangePassword = () => {
     const windowWidth:number = Dimensions.get('window').width;
     const [email,setEmail] = useState('')
     const [newPassword,setNewPassword] = useState('')

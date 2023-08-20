@@ -13,6 +13,7 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import ErrorComponent from "../components/errorComponent";
 import { getToken } from "../utils/tokenStorage";
+import Protected from "../protected";
 
 
 interface food  {
@@ -38,7 +39,7 @@ interface food  {
     }
   
     
-const Home:FC = () => {
+const Home = () => {
     const  { currentUser} = useApp()
     const homeApi = new HomeApi()
     const [name,setName] = useState('')
@@ -47,13 +48,6 @@ const Home:FC = () => {
     const [error,setError] = useState("")
     const navigation = useNavigation()
 
-    useEffect(()=>{
-        const get = async() => {
-            let token = await getToken()
-            console.log((token));
-        }
-        get()
-    },[])
     const clearError = () => {
         setError("")
       }
@@ -86,7 +80,6 @@ const Home:FC = () => {
     return (
         
         <ScrollView style={[styles.container]}>
-            
 
             {error !== "" && (<ErrorComponent text={error} clearError={clearError}/>)}
             {loading && <ActivityIndicator size='large' color="black" style={{position:'absolute',zIndex:2,left:'50%',top:'10%'}}/>}
@@ -97,8 +90,8 @@ const Home:FC = () => {
 
             <View style={[styles.secondRow,{paddingHorizontal:windowWidth*0.02,marginTop:windowWidth*0.03}]}>
                 <Text style={[styles.secondRowTxt,{fontSize:windowWidth*0.085,lineHeight:40}]}>find you next meal near you</Text>
-                {currentUser.profile_pic?( <TouchableOpacity style={{width:windowWidth*0.16,height:windowWidth*0.16,position:"relative"}}>
-                    <Image style={{width:'100%', height:'100%',borderRadius:windowWidth*0.5}} source={require('../assets/p1.jpg')}  />
+                {currentUser.profile_pic?( <TouchableOpacity onPress={()=>navigation.navigate('Profile')} style={{width:windowWidth*0.16,height:windowWidth*0.16,position:"relative"}}>
+                    <Image style={{width:'100%', height:'100%',borderRadius:windowWidth*0.5}} source={{uri:currentUser.profile_pic}}  />
                 </TouchableOpacity>):<ProfilePlaceholder username={currentUser.username} width={windowWidth*0.16} height={windowWidth*0.16} />
                 }
             </View>

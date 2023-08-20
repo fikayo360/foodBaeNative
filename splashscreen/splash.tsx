@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import * as Font from 'expo-font'; 
 
 
-const SplashSreen:FC = () => {
+const SplashSreen = () => {
     const [fontsLoaded, setFontsLoaded] = useState(false);
     const navigation = useNavigation();
     useEffect(() => {

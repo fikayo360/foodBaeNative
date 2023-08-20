@@ -6,7 +6,7 @@ import AuthApi from "../api/authApp";
 import axios from "axios";
 import { useNavigation } from '@react-navigation/native';
 
-const ForgotPassword:FC = () => {
+const ForgotPassword = () => {
     const windowWidth:number = Dimensions.get('window').width;
     const [email,setEmail] = useState('')
     const [loading,setLoading] = useState(true)

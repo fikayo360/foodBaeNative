@@ -14,7 +14,7 @@ import { BackHandler } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import * as Font from 'expo-font'; 
 
-const AuthScreen:FC = () => {
+const AuthScreen = () => {
     const windowWidth:number = Dimensions.get('window').width;
     const [tabActive,setTabActive] = useState('register')
     const [username,setUsername] = useState('')
@@ -76,6 +76,7 @@ const AuthScreen:FC = () => {
     }
 
     const handleLogin = async() => {
+     
         if (!lusername ||  !lpassword){
             console.log('fields cant be empty')
             setError('fields cant be empty')
@@ -93,7 +94,7 @@ const AuthScreen:FC = () => {
             const token = response.data.cookie
             console.log(user,token);
             login(user,token)
-            navigation.navigate('Home')
+            navigation.navigate('tab')
             setLoadingL(true)
             setLusername('')
             setLpassword('')
@@ -175,7 +176,7 @@ const AuthScreen:FC = () => {
                 />     
                 </View>
 
-                <TouchableOpacity onPress={remtoken} style={[styles.signUpBtn,{borderRadius:windowWidth*0.03,marginTop:windowWidth*0.2,height:windowWidth*0.15}]}>
+                <TouchableOpacity onPress={handleSignup} style={[styles.signUpBtn,{borderRadius:windowWidth*0.03,marginTop:windowWidth*0.2,height:windowWidth*0.15}]}>
                     {loading?<Text style={[styles.signUpBtnTxt,{fontSize:windowWidth*0.05}]}>SignUp</Text> : 
                     <ActivityIndicator size="large" color="white" style={{position:'absolute'}}/>}
                 </TouchableOpacity>
