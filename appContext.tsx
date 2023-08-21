@@ -34,7 +34,8 @@ interface AppContextType {
   totalValue:number;
   updateQuantity:(productTitle:string) => void;
   deleteQuantity:(productTitle:string) => void;
-  setTottalValue:(newValue: number) => void
+  setTottalValue:(newValue: number) => void;
+  updateProfilePic:(newProfilePic:string) => void;
 }
 
 
@@ -81,6 +82,12 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       setTotalValue(newValue)
     }
 
+    const updateProfilePic = (newProfilePic:string) => {
+      setCurrentUser({
+        ...currentUser,
+        profile_pic: newProfilePic,
+      });
+    }
     const updateQuantity = (productTitle: string) => {
       const updatedData = cartItems.map(item => {
         if (item.title === productTitle) {
@@ -122,7 +129,8 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
           totalValue,
           setTottalValue,
           updateQuantity,
-          deleteQuantity
+          deleteQuantity,
+          updateProfilePic
         }}
       >
         {children}
@@ -131,10 +139,3 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   };
   
   export { AppProvider, AppContext };
-
-  
-  
-  
-  
-  
-  

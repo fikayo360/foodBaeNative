@@ -22,6 +22,10 @@ interface changePasswordData{
     newPassword:string;
 }
 
+interface updateProfileData{
+    newProfilePic:string
+}
+
 class AuthApi {
    
     Login(loginData:loginData){
@@ -38,7 +42,12 @@ class AuthApi {
 
      ChangePassword(data:changePasswordData){
         return axios.post('api/v1/user/changePassword',data)
-}
+    }
+
+    UpdateProfilePic(data:updateProfileData){
+        return axios.post('api/v1/user/updateProfilePic',data)
+    }
+
 }
 
 export default AuthApi

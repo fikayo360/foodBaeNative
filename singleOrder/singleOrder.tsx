@@ -14,6 +14,7 @@ interface geolocation {
 }
 
 const SingleOrder = () => {
+  const {currentUser} = useApp()
     const windowWidth = Dimensions.get('window').width
     const [userLocation, setUserLocation] = useState<geolocation>({latitude:0,longitude:0});
     const [serverLocation, setServerLocation] = useState<geolocation>({latitude:0,longitude:0});
@@ -68,7 +69,7 @@ const SingleOrder = () => {
         </TouchableOpacity>
         <Text style={{fontSize:windowWidth*0.07}}> Order </Text>
         <TouchableOpacity style={{width:windowWidth*0.1,height:windowWidth*0.1,position:"relative"}}>
-        <Image style={{width:'100%', height:'100%',borderRadius:windowWidth*0.5}} source={require('../assets/p1.jpg')}  />
+        <Image style={{width:'100%', height:'100%',borderRadius:windowWidth*0.5}} source={{uri:currentUser.profile_pic}}  />
         </TouchableOpacity>
         </View>
         <View style={{ width: '100%', height:windowWidth*0.9,borderBottomColor:'black',borderBottomWidth:1}}>

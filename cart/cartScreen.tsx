@@ -20,7 +20,8 @@ interface food  {
 const CartScreen = ( ) => {
     const navigation = useNavigation()
     const windowWidth = Dimensions.get('window').width
-    const {cartItems,addToCart,removeFromCart,updateQuantity,deleteQuantity,setTottalValue,totalValue} = useApp()
+    const {cartItems,addToCart,removeFromCart,updateQuantity,deleteQuantity,setTottalValue,totalValue,currentUser,setNewAddress} = useApp()
+    const [address,setAddress] = useState('')
     const [items,setItems] = useState<food[]>([])
 
     const removeItemfromCart = (title:string) => {
@@ -62,20 +63,24 @@ const CartScreen = ( ) => {
         </TouchableOpacity>
         <Text style={{fontSize:windowWidth*0.07}}> Cart </Text>
         <TouchableOpacity style={{width:windowWidth*0.1,height:windowWidth*0.1,position:"relative"}}>
-        <Image style={{width:'100%', height:'100%',borderRadius:windowWidth*0.5}} source={require('../assets/p1.jpg')}  />
+        <Image style={{width:'100%', height:'100%',borderRadius:windowWidth*0.5}} source={{uri:currentUser.profile_pic}}  />
         </TouchableOpacity>
         </View>
-        <View style={[styles.addressContainer,{height:windowWidth*0.4,paddingLeft:windowWidth*0.02,marginBottom:windowWidth*0.06}]}>
+        <View style={[styles.addressContainer,{height:windowWidth*0.7,paddingLeft:windowWidth*0.02,marginBottom:windowWidth*0.06}]}>
             <Text style={{fontSize:windowWidth*0.05,fontWeight:'bold',marginBottom:windowWidth*0.03}} >Delivery</Text>
             <Text style={{fontSize:windowWidth*0.04,fontWeight:'bold',marginBottom:windowWidth*0.03}}>Address details</Text>
             <TextInput
             style={[styles.inputStyles,{height:windowWidth*0.20,fontSize:windowWidth*0.04,borderRadius:windowWidth*0.03,padding:windowWidth*0.03}]}
             multiline={true}
             numberOfLines={4}
-            // value={token}
-            // onChangeText={text => setToken(text)}
+            value={address}
+            onChangeText={text => setAddress(text)}
             placeholder="enter your address"
             />
+            <TouchableOpacity style={{width:'98%',alignSelf:'center',height:windowWidth*0.20, backgroundColor:'#002642',justifyContent:'center',alignItems:'center',
+            borderRadius:windowWidth*0.03,marginTop:windowWidth*0.04}}>
+                <Text style={{fontSize:windowWidth*0.05,color:'white',fontWeight:'bold'}}>save address</Text> 
+             </TouchableOpacity>
         </View>
         <View style={[styles.itemsContainer,{paddingLeft:windowWidth*0.015,marginBottom:windowWidth*0.05}]}>
             <Text style={{fontSize:windowWidth*0.05,fontWeight:'bold',marginBottom:windowWidth*0.03,}}>Items</Text>
@@ -113,7 +118,8 @@ const CartScreen = ( ) => {
             <Text style={{fontSize:windowWidth*0.06}}>{totalValue}</Text>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Checkout')} style={[styles.btn,{height:windowWidth*0.20,borderRadius:windowWidth*0.03,paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.06}]}>
+        <TouchableOpacity onPress={() => navigation.navigate('Checkout')} style={[styles.btn,{height:windowWidth*0.20,borderRadius:windowWidth*0.03,
+            paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.06}]}>
             <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',color:'white'}}>Checkout</Text>
             <Text style={{fontSize:windowWidth*0.06,color:'white'}}>{totalValue}</Text>
         </TouchableOpacity>

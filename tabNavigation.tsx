@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 const TabBar = () => {
   const windowWidth = Dimensions.get('window').width
   const Tab = createBottomTabNavigator()
+  const {cartItems} = useApp()
   const navigation = useNavigation()
   const screenOptions = {
     tabBarShowLabel: false,
@@ -55,7 +56,7 @@ const TabBar = () => {
                   return (
                   <View >
                     <View style={{position:'absolute',top:-windowWidth*0.03,left:windowWidth*0.05,borderColor:'grey',backgroundColor:focused?'#6153CC':'white',borderWidth:1,width:windowWidth*0.065,height:windowWidth*0.065,
-                    borderRadius:windowWidth*0.6,justifyContent:'center',alignItems:'center'}}><Text style={{color:'black',fontSize:windowWidth*0.03,fontWeight:'bold'}}>{0}</Text></View>
+                    borderRadius:windowWidth*0.6,justifyContent:'center',alignItems:'center'}}><Text style={{color:'black',fontSize:windowWidth*0.03,fontWeight:'bold'}}>{cartItems.length}</Text></View>
                     <MaterialCommunityIcons name="cart" size={windowWidth*0.08} color={focused?'#6153CC':'white'}/>
                   </View>)
                  }

@@ -90,8 +90,9 @@ const Home = () => {
 
             <View style={[styles.secondRow,{paddingHorizontal:windowWidth*0.02,marginTop:windowWidth*0.03}]}>
                 <Text style={[styles.secondRowTxt,{fontSize:windowWidth*0.085,lineHeight:40}]}>find you next meal near you</Text>
-                {currentUser.profile_pic?( <TouchableOpacity onPress={()=>navigation.navigate('Profile')} style={{width:windowWidth*0.16,height:windowWidth*0.16,position:"relative"}}>
-                    <Image style={{width:'100%', height:'100%',borderRadius:windowWidth*0.5}} source={{uri:currentUser.profile_pic}}  />
+                {currentUser.profile_pic?( <TouchableOpacity onPress={()=>navigation.navigate('Profile')} style={{width:windowWidth*0.16,
+                    height:windowWidth*0.16,position:"relative"}}>
+                    <Image style={{width:'100%', height:'100%',borderRadius:windowWidth*0.5,borderWidth:0.5,borderColor:'black'}} source={{uri:currentUser.profile_pic}}  />
                 </TouchableOpacity>):<ProfilePlaceholder username={currentUser.username} width={windowWidth*0.16} height={windowWidth*0.16} />
                 }
             </View>
