@@ -6,14 +6,35 @@ import React from 'react';
 import  { Paystack }  from 'react-native-paystack-webview';
 import WebView from "react-native-webview";
 import { useNavigation } from "@react-navigation/native";
-import Protected from "../protected";
+import Order from "../api/order";
+import axios from "axios";
+
 
 const Checkout = () => {
     const windowWidth = Dimensions.get('window').width
-    const {currentUser,cartItems,totalValue} = useApp()
+    const {currentUser,cartItems,totalValue,address,clearCartData} = useApp()
     const navigation = useNavigation()
+    const order = new Order()
+
+    const createOrder = async() => {
+        console.log('hi');
+    //    try{
+    //     let OrderData = {products:cartItems,amount:totalValue,address}
+    //     const response = await order.createOrder(OrderData)
+    //     console.log(response.data);
+    //     clearCartData()
+    //     console.log({cartItems,totalValue,address});
+    //     navigation.navigate('singleOrder')
+    //    }catch(err){
+    //     if (axios.isAxiosError(err)) {
+    //         console.log(err.response?.data);
+    //       }
+    //    }
+    }
+
+
     return (
-        <Protected>
+       
         <SafeAreaView style={styles.container}>
             <ScrollView style={{flex:1}}>
             <View style={[styles.header,{paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.01,paddingVertical:windowWidth*0.08}]}>
@@ -34,16 +55,18 @@ const Checkout = () => {
             activityIndicatorColor="green"
             onCancel={(e) => {
             navigation.navigate('singleOrder')
+            // navigation.navigate('home')
             }}
             onSuccess={(res) => {
-            // handle response here
+            //  navigation.navigate('singleOrder')
+            createOrder
             }}
             autoStart={true}
             />
             </View>
                 </ScrollView>
             </SafeAreaView>
-            </Protected>
+          
     )
 }
 

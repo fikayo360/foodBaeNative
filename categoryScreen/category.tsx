@@ -7,7 +7,9 @@ import FoodItems from '../mocks/foodCategoryItem';
 import CategoryApi from "../api/categories";
 import { RefreshControl } from "react-native";
 import axios from "axios";
-import Protected from "../protected";
+import { useNavigation } from "@react-navigation/native";
+import useApp from "../hooks/useApp";
+
 
 const CategoryScreen = ({route}:any) => {
     const {catName} = route.params
@@ -15,6 +17,7 @@ const CategoryScreen = ({route}:any) => {
     const [refreshing, setRefreshing] = useState(false);
     const [loading,setLoading] = useState(true)
     const categoryApi = new CategoryApi()
+    const {currentUser} = useApp()
 
     const getCategories = async() => {
         try{
@@ -41,17 +44,18 @@ const CategoryScreen = ({route}:any) => {
       }
 
     const windowWidth = Dimensions.get('window').width
+    const navigation = useNavigation()
     return (
        
     <SafeAreaView style={[styles.container,{paddingTop:windowWidth*0.1}]}>
         {loading && <ActivityIndicator size='large' color="black" style={{position:'absolute',top:'30%',left:'50%',zIndex:2}}/>}
         <View style={[styles.header,{paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.05}]}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
         <Image style={{width:windowWidth*0.07, height:windowWidth*0.07,borderRadius:windowWidth*0.5}} source={require('../assets/left.png')}  />
         </TouchableOpacity>
         <Text style={{fontSize:windowWidth*0.08}}> {catName}</Text>
         <TouchableOpacity style={{width:windowWidth*0.1,height:windowWidth*0.1,position:"relative"}}>
-        <Image style={{width:'100%', height:'100%',borderRadius:windowWidth*0.5}} source={require('../assets/p1.jpg')}  />
+        <Image style={{width:'100%', height:'100%',borderRadius:windowWidth*0.5}} source={{uri:currentUser.profile_pic}}  />
         </TouchableOpacity>
         </View>
         {!loading && (<ScrollView style={{flex:1}} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>

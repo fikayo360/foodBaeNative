@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 const TabBar = () => {
   const windowWidth = Dimensions.get('window').width
   const Tab = createBottomTabNavigator()
-  const {cartItems} = useApp()
+  const {cartItems,logout} = useApp()
   const navigation = useNavigation()
   const screenOptions = {
     tabBarShowLabel: false,

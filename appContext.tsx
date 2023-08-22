@@ -36,6 +36,7 @@ interface AppContextType {
   deleteQuantity:(productTitle:string) => void;
   setTottalValue:(newValue: number) => void;
   updateProfilePic:(newProfilePic:string) => void;
+  clearCartData:() => void
 }
 
 
@@ -51,6 +52,12 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     const [cartItems,setCartItems] = useState<food[]>([])
     const [address,setAddress] = useState('')
     const [totalValue,setTotalValue] = useState(0)
+
+    const clearCartData = ( ) => {
+      setAddress('')
+      setTotalValue(0)
+      setCartItems([])
+    }
    
     const login = async (user: User, token: string) => {
       setCurrentUser(user);
@@ -130,7 +137,8 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
           setTottalValue,
           updateQuantity,
           deleteQuantity,
-          updateProfilePic
+          updateProfilePic,
+          clearCartData
         }}
       >
         {children}

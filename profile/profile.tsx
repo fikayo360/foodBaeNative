@@ -61,6 +61,7 @@ const Profile = () => {
     const update = async() => {
         try{
             const response = await Auth.UpdateProfilePic({newProfilePic})
+            console.log(response.data);
             updateProfilePic(newProfilePic)
             setNotification(response.data)
             setNewProfilePic('')

@@ -5,11 +5,11 @@ import { useEffect,useState } from "react"
 import useApp from "../hooks/useApp";
 import { useNavigation } from "@react-navigation/native";
 import NotificationAlert from "../components/notificationComponent";
-import Protected from "../protected";
+
 
 const SingleFood = ({route}:any) => {
     const navigation = useNavigation()
-    const {cartItems,addToCart,removeFromCart} = useApp()
+    const {cartItems,addToCart,removeFromCart,currentUser} = useApp()
     const windowWidth = Dimensions.get('window').width
     const {foodData} = route.params
     const [notification,setNotification] = useState("")
@@ -31,20 +31,20 @@ const SingleFood = ({route}:any) => {
       }
     
     return (
-        <Protected>
+     
         <SafeAreaView style={styles.container}>
          {notification !== "" && (<NotificationAlert text={notification} clearNotification={clearNotification}/>)}
         <View style={[styles.header,{paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.01,paddingVertical:windowWidth*0.08}]}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
         <Image style={{width:windowWidth*0.07, height:windowWidth*0.07,borderRadius:windowWidth*0.5}} source={require('../assets/left.png')}  />
         </TouchableOpacity>
         <Text style={{fontSize:windowWidth*0.07}}> {foodData.title} </Text>
         <TouchableOpacity  style={{width:windowWidth*0.1,height:windowWidth*0.1,position:"relative"}}>
-        <Image style={{width:'100%', height:'100%',borderRadius:windowWidth*0.5}} source={require('../assets/p1.jpg')}  />
+        <Image style={{width:'100%', height:'100%',borderRadius:windowWidth*0.5}} source={{uri:currentUser.profile_pic}}   />
         </TouchableOpacity>
         </View>
         <ScrollView style={{flex:1}}>
-        <TouchableOpacity onPress={()=>navigation.navigate('CartScreen')} style={{width:windowWidth*0.97, height:windowWidth*0.82,alignSelf:'center',marginBottom:windowWidth*0.1}}>
+        <TouchableOpacity style={{width:windowWidth*0.97, height:windowWidth*0.82,alignSelf:'center',marginBottom:windowWidth*0.1}}>
             <Image resizeMode="cover" style={{width:'100%', height:'100%'}} source={{uri:foodData.image}}/>
         </TouchableOpacity>
         <View style={[styles.infoContainer]}>
@@ -65,7 +65,7 @@ const SingleFood = ({route}:any) => {
         </TouchableOpacity>
         </ScrollView>
         </SafeAreaView>
-        </Protected>
+       
     )
 }
 
