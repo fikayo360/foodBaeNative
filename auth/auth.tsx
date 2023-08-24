@@ -30,6 +30,7 @@ const AuthScreen = () => {
     const [notification,setNotification] = useState("")
     const Api = new AuthApi()
     const navigation = useNavigation();
+    const [fontsLoaded, setFontsLoaded] = useState(false);
     const  { currentUser, setCurrentUser,login, logout } = useApp()
 
     const clearError = () => {
@@ -115,6 +116,20 @@ const AuthScreen = () => {
         const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
         return () => backHandler.remove();
       });
+
+      const loadFonts = async () => {
+        await Font.loadAsync({
+          "PoppinsBlack": require("../assets/fonts/Poppins-Black.ttf"),
+          "Roboto-Black": require("../assets/fonts/Roboto-Black.ttf"),
+          "Roboto": require("../assets/fonts/Roboto-Regular.ttf")
+        });
+        setFontsLoaded(true);
+      };
+    
+      if (!fontsLoaded) {
+        loadFonts();
+        return null; 
+      }
       
     return (
          <SafeAreaView style={styles.container}>
@@ -126,7 +141,7 @@ const AuthScreen = () => {
              <View style={{width:'100%',height:'10%',borderBottomWidth:1,alignItems:'center',justifyContent:'space-between',flexDirection:'row'}}>
                 <TouchableOpacity onPress={()=>setTabActive('register')} style={[styles.innerContainerHeaderBtn,{
                     backgroundColor: tabActive === "register" ? '#0B0033' : 'white',} ]}>
-                    <Text style={{color:tabActive === "register"?'white':'black',fontSize:windowWidth*0.05,fontWeight:'bold'}}>Register</Text>
+                    <Text style={{color:tabActive === "register"?'white':'black',fontSize:windowWidth*0.05,fontWeight:'bold',fontFamily:"Roboto"}}>Register</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>setTabActive('login')} style={[styles.innerContainerHeaderBtn,{
                     backgroundColor: tabActive === "login" ? '#0B0033' : 'white'}]}>

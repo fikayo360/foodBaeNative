@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
         width:'96%',
         alignSelf:'center',
         alignItems:'center',
-        borderColor:'black',
         borderWidth:0.5,
         justifyContent:'space-between'
     },

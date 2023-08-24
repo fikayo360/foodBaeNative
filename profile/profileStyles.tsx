@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
         width:'95%',
         height:'20%',
         alignSelf:'center',
-        backgroundColor:'#FFFFFF',
         borderColor:'grey',
         borderWidth:0.5
     }

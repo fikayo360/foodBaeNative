@@ -17,21 +17,28 @@ const Checkout = () => {
     const order = new Order()
 
     const createOrder = async() => {
-        console.log('hi');
-    //    try{
-    //     let OrderData = {products:cartItems,amount:totalValue,address}
-    //     const response = await order.createOrder(OrderData)
-    //     console.log(response.data);
-    //     clearCartData()
-    //     console.log({cartItems,totalValue,address});
-    //     navigation.navigate('singleOrder')
-    //    }catch(err){
-    //     if (axios.isAxiosError(err)) {
-    //         console.log(err.response?.data);
-    //       }
-    //    }
+       try{
+        let OrderData = {products:cartItems,amount:totalValue,address}
+        const response = await order.createOrder(OrderData)
+        console.log(response.data);
+        clearCartData()
+        console.log({cartItems,totalValue,address});
+        navigation.navigate('singleOrder',{data:response.data})
+       }catch(err){
+        if (axios.isAxiosError(err)) {
+            console.log(err.response?.data);
+          }
+       }
     }
 
+    const handleOnSuccess = (res:any) => {
+        console.log(res);
+        if (res.status === 1) {
+          createOrder()
+        } else {
+          console.log('payment error');
+        }
+      }
 
     return (
        
@@ -54,12 +61,10 @@ const Checkout = () => {
             billingEmail={currentUser.email}
             activityIndicatorColor="green"
             onCancel={(e) => {
-            navigation.navigate('singleOrder')
-            // navigation.navigate('home')
+            createOrder()
             }}
             onSuccess={(res) => {
-            //  navigation.navigate('singleOrder')
-            createOrder
+                console.log(res.data);
             }}
             autoStart={true}
             />

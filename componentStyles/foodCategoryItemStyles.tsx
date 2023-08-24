@@ -3,8 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
 container:{
     alignSelf:'center',
-    borderBottomWidth:1,
-    borderBottomColor:'black'
+    borderBottomWidth:1
 },
 bottom:{
     width:'100%',

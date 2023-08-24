@@ -8,19 +8,20 @@ import MapView, { Marker,Polyline } from 'react-native-maps';
 import axios from "axios";
 import Cartitems from "../mocks/cartItems";
 import { useNavigation } from "@react-navigation/native";
-
+import { Fontisto } from '@expo/vector-icons';
 
 interface geolocation {
     latitude: number;
     longitude: number;
 }
 
-const SingleOrder = () => {
-  const {currentUser} = useApp()
+const SingleOrder = ({route}:any) => {
+  const {currentUser,theme} = useApp()
     const windowWidth = Dimensions.get('window').width
     const [userLocation, setUserLocation] = useState<geolocation>({latitude:0,longitude:0});
     const [serverLocation, setServerLocation] = useState<geolocation>({latitude:0,longitude:0});
     const navigation = useNavigation()
+    const {data} = route.params
   
     const getCurrentLocation = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -101,14 +102,15 @@ const SingleOrder = () => {
     };
     return (
       
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container,{backgroundColor:theme==='dark'?'#1e1e1e':'white'}]}>
         <ScrollView style={{flex:1}}>
-        <View style={[styles.header,{paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.01,paddingVertical:windowWidth*0.08,borderBottomWidth:1,borderBottomColor:'black'}]}>
+        <View style={[styles.header,{paddingHorizontal:windowWidth*0.03,paddingVertical:windowWidth*0.08,marginBottom:windowWidth*0.01,borderBottomWidth:1,
+          borderBottomColor:theme==='dark'?'#fafafa':"black",backgroundColor:theme==='dark'?'#282a2b':'white'}]}>
         <TouchableOpacity onPress={() => navigation.navigate('home')}>
-        <Image style={{width:windowWidth*0.07, height:windowWidth*0.07,borderRadius:windowWidth*0.5}} source={require('../assets/left.png')}  />
+        <Fontisto name="angle-left" size={windowWidth*0.07} color={theme==='dark'?'#fafafa':"black"} />
         </TouchableOpacity>
-        <Text style={{fontSize:windowWidth*0.07}}> Order </Text>
-        <TouchableOpacity style={{width:windowWidth*0.1,height:windowWidth*0.1,position:"relative"}}>
+        <Text style={{fontSize:windowWidth*0.07,color:theme==='dark'?'#fafafa':'black'}}> Order </Text>
+        <TouchableOpacity onPress={()=>navigation.navigate('Profile')} style={{width:windowWidth*0.1,height:windowWidth*0.1,position:"relative"}}>
         <Image style={{width:'100%', height:'100%',borderRadius:windowWidth*0.5}} source={{uri:currentUser.profile_pic}}  />
         </TouchableOpacity>
         </View>
@@ -132,34 +134,35 @@ const SingleOrder = () => {
 
         <View style={{width:'97%',alignSelf:"center",paddingHorizontal:windowWidth*0.02,paddingTop:windowWidth*0.05}}>
           <View style={{width:'100%',flexDirection:'row',justifyContent:'space-between',marginBottom:windowWidth*0.1,alignSelf:"center"}}> 
-          <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold'}}>status</Text>
-          <Text style={{fontSize:windowWidth*0.05}}>pending</Text>
+          <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',color:theme==='dark'?'#fafafa':'black'}}>status</Text>
+          <Text style={{fontSize:windowWidth*0.05,color:theme==='dark'?'#fafafa':'black'}}>pending</Text>
           </View>
           <View style={{width:'100%',flexDirection:'row',justifyContent:'space-between',marginBottom:windowWidth*0.1,alignSelf:"center"}}>
-          <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold'}}> amount </Text>
-          <Text style={{fontSize:windowWidth*0.05}}>2000</Text>
+          <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',color:theme==='dark'?'#fafafa':'black'}}> amount </Text>
+          <Text style={{fontSize:windowWidth*0.05,color:theme==='dark'?'#fafafa':'black'}}>2000</Text>
           </View>
           <View style={{width:'100%',justifyContent:'space-between',marginBottom:windowWidth*0.06,alignSelf:"center"}}>
-          <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',marginBottom:windowWidth*0.02}}>address</Text>
-          <Text style={{fontSize:windowWidth*0.05}}>27,glourious hope oriokuta boulevard ikorodu lagos</Text>
+          <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',marginBottom:windowWidth*0.02,color:theme==='dark'?'#fafafa':'black'}}>address</Text>
+          <Text style={{fontSize:windowWidth*0.05,color:theme==='dark'?'#fafafa':'black'}}>27,glourious hope oriokuta boulevard ikorodu lagos</Text>
           </View>
         </View>
 
         <View style={[styles.itemsContainer,{paddingLeft:windowWidth*0.015,marginBottom:windowWidth*0.05}]}>
-            <Text style={{fontSize:windowWidth*0.05,fontWeight:'bold',marginBottom:windowWidth*0.03,}}>Items</Text>
+            <Text style={{fontSize:windowWidth*0.05,fontWeight:'bold',marginBottom:windowWidth*0.03,color:theme==='dark'?'#fafafa':'black'}}>Items</Text>
            
-            {Cartitems && Cartitems.map((item,index)=> (
+            {data.cartitems && data.cartitems.map((item:any,index:any)=> (
                 
-                <View key={index.toString()} style={[styles.cartItems,{paddingHorizontal:windowWidth*0.03,height:windowWidth*0.23,borderRadius:windowWidth*0.03,marginBottom:windowWidth*0.05}]}>
+                <View key={index.toString()} style={[styles.cartItems,{paddingHorizontal:windowWidth*0.03,height:windowWidth*0.23,borderRadius:windowWidth*0.03,
+                marginBottom:windowWidth*0.05,borderColor:theme==='dark'?'#fafafa':'black'}]}>
                
-                <Image style={{width:windowWidth*0.15, height:windowWidth*0.15,borderRadius:windowWidth*0.5,marginRight:windowWidth*0.03}} source={{uri:item.img}}/> 
+                <Image style={{width:windowWidth*0.15, height:windowWidth*0.15,borderRadius:windowWidth*0.5,marginRight:windowWidth*0.03}} source={{uri:item.image}}/> 
                 <View style={{marginRight:windowWidth*0.1,marginLeft:windowWidth*0.08}}>
-                    <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold'}}>{item.name}</Text>
-                    <Text style={{fontSize:windowWidth*0.05}}>{item.price}</Text>
+                    <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',color:theme==='dark'?'#fafafa':'black'}}>{item.title}</Text>
+                    <Text style={{fontSize:windowWidth*0.05,color:theme==='dark'?'#fafafa':'black'}}>{item.price}</Text>
                 </View>
                 <View style={{borderColor:'black',flexDirection:'row',alignItems:'center',
                 width:windowWidth*0.18,height:windowWidth*0.11,justifyContent:'center',paddingHorizontal:windowWidth*0.017,borderRadius:windowWidth*0.047,position:'absolute',top:'20%',right:10}}>
-                    <Text style={{fontSize:windowWidth*0.05}}>{item.quantity}</Text>
+                    <Text style={{fontSize:windowWidth*0.05,color:theme==='dark'?'#fafafa':'black'}}>{item.quantity}</Text>
                 </View>
                 </View>
            ))}

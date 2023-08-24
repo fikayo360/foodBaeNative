@@ -37,6 +37,8 @@ interface AppContextType {
   setTottalValue:(newValue: number) => void;
   updateProfilePic:(newProfilePic:string) => void;
   clearCartData:() => void
+  theme:string;
+  toggleTheme:() => void;
 }
 
 
@@ -52,6 +54,15 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     const [cartItems,setCartItems] = useState<food[]>([])
     const [address,setAddress] = useState('')
     const [totalValue,setTotalValue] = useState(0)
+    const [theme,setTheme] = useState('light')
+
+    const toggleTheme = () => {
+      if(theme === 'light'){
+        setTheme('dark')
+      }else{
+        setTheme('light')
+      }
+    }
 
     const clearCartData = ( ) => {
       setAddress('')
@@ -138,7 +149,9 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
           updateQuantity,
           deleteQuantity,
           updateProfilePic,
-          clearCartData
+          clearCartData,
+          theme,
+          toggleTheme
         }}
       >
         {children}

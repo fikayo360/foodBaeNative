@@ -16,7 +16,7 @@ const styles= StyleSheet.create({
       },
       cartItems:{
         width:'98%',
-        borderColor:'black',
+       
         borderWidth:1,
         alignItems:'center',
         flexDirection:'row'
