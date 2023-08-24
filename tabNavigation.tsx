@@ -1,5 +1,5 @@
 import CartScreen from "./cart/cartScreen";
-import Order from "./order/order";
+import Orders from "./order/order";
 import Home from "./home/home";
 import { DarkTheme, NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -64,7 +64,7 @@ const TabBar = () => {
                  }
                 }}/>
 
-                <Tab.Screen name="Order" component={Order} options={{
+                <Tab.Screen name="Order" component={Orders} options={{
                  tabBarIcon:({focused})=>{
                   return (
                   <View>

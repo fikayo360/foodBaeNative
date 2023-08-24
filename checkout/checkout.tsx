@@ -22,8 +22,7 @@ const Checkout = () => {
         const response = await order.createOrder(OrderData)
         console.log(response.data);
         clearCartData()
-        console.log({cartItems,totalValue,address});
-        navigation.navigate('singleOrder',{data:response.data})
+        navigation.navigate('singleOrder',{Data:response.data})
        }catch(err){
         if (axios.isAxiosError(err)) {
             console.log(err.response?.data);
@@ -64,7 +63,7 @@ const Checkout = () => {
             createOrder()
             }}
             onSuccess={(res) => {
-                console.log(res.data);
+
             }}
             autoStart={true}
             />

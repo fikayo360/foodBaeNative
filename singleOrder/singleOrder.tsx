@@ -10,6 +10,7 @@ import Cartitems from "../mocks/cartItems";
 import { useNavigation } from "@react-navigation/native";
 import { Fontisto } from '@expo/vector-icons';
 
+
 interface geolocation {
     latitude: number;
     longitude: number;
@@ -21,7 +22,12 @@ const SingleOrder = ({route}:any) => {
     const [userLocation, setUserLocation] = useState<geolocation>({latitude:0,longitude:0});
     const [serverLocation, setServerLocation] = useState<geolocation>({latitude:0,longitude:0});
     const navigation = useNavigation()
-    const {data} = route.params
+    const {Data} = route.params
+
+    useEffect(()=>{
+      console.log('hi');
+      console.log(route.params);
+    },[])
   
     const getCurrentLocation = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -135,22 +141,22 @@ const SingleOrder = ({route}:any) => {
         <View style={{width:'97%',alignSelf:"center",paddingHorizontal:windowWidth*0.02,paddingTop:windowWidth*0.05}}>
           <View style={{width:'100%',flexDirection:'row',justifyContent:'space-between',marginBottom:windowWidth*0.1,alignSelf:"center"}}> 
           <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',color:theme==='dark'?'#fafafa':'black'}}>status</Text>
-          <Text style={{fontSize:windowWidth*0.05,color:theme==='dark'?'#fafafa':'black'}}>pending</Text>
+          <Text style={{fontSize:windowWidth*0.05,color:theme==='dark'?'#fafafa':'black'}}>{String(Data.status)}</Text>
           </View>
           <View style={{width:'100%',flexDirection:'row',justifyContent:'space-between',marginBottom:windowWidth*0.1,alignSelf:"center"}}>
           <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',color:theme==='dark'?'#fafafa':'black'}}> amount </Text>
-          <Text style={{fontSize:windowWidth*0.05,color:theme==='dark'?'#fafafa':'black'}}>2000</Text>
+          <Text style={{fontSize:windowWidth*0.05,color:theme==='dark'?'#fafafa':'black'}}>{Data.amount}</Text>
           </View>
           <View style={{width:'100%',justifyContent:'space-between',marginBottom:windowWidth*0.06,alignSelf:"center"}}>
           <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',marginBottom:windowWidth*0.02,color:theme==='dark'?'#fafafa':'black'}}>address</Text>
-          <Text style={{fontSize:windowWidth*0.05,color:theme==='dark'?'#fafafa':'black'}}>27,glourious hope oriokuta boulevard ikorodu lagos</Text>
+          <Text style={{fontSize:windowWidth*0.05,color:theme==='dark'?'#fafafa':'black'}}>{Data.address}</Text>
           </View>
         </View>
 
         <View style={[styles.itemsContainer,{paddingLeft:windowWidth*0.015,marginBottom:windowWidth*0.05}]}>
             <Text style={{fontSize:windowWidth*0.05,fontWeight:'bold',marginBottom:windowWidth*0.03,color:theme==='dark'?'#fafafa':'black'}}>Items</Text>
            
-            {data.cartitems && data.cartitems.map((item:any,index:any)=> (
+            {Data.products && Data.products.map((item:any,index:any)=> (
                 
                 <View key={index.toString()} style={[styles.cartItems,{paddingHorizontal:windowWidth*0.03,height:windowWidth*0.23,borderRadius:windowWidth*0.03,
                 marginBottom:windowWidth*0.05,borderColor:theme==='dark'?'#fafafa':'black'}]}>
