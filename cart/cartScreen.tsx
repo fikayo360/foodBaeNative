@@ -7,6 +7,7 @@ import NotificationAlert from "../components/notificationComponent";
 import { Fontisto } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 interface food  {
     id:string;
@@ -84,7 +85,8 @@ const CartScreen = ( ) => {
       
         <ScrollView style={{flex:1,backgroundColor:theme==='dark'?'#1e1e1e':'white',}}>
              {notification !== "" && (<NotificationAlert text={notification} clearNotification={clearNotification}/>)}
-        <View style={[styles.header,{height:'10%',paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.07,paddingVertical:windowWidth*0.04,backgroundColor:theme==='dark'?'#282a2b':'white'}]}>
+             
+        <View style={[styles.header,{paddingHorizontal:windowWidth*0.03,marginBottom:windowWidth*0.07,paddingVertical:windowWidth*0.08,backgroundColor:theme==='dark'?'#282a2b':'white'}]}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
         <Fontisto name="angle-left" size={windowWidth*0.07} color={theme==='dark'?'#fafafa':"black"} />
         </TouchableOpacity>
@@ -112,7 +114,9 @@ const CartScreen = ( ) => {
              </TouchableOpacity>
         </View>
 
-        <View style={[styles.itemsContainer,{paddingLeft:windowWidth*0.015,marginBottom:windowWidth*0.05}]}>
+        {
+          cartItems?(
+            <View style={[styles.itemsContainer,{paddingLeft:windowWidth*0.015,marginBottom:windowWidth*0.05}]}>
             <Text style={{fontSize:windowWidth*0.05,fontWeight:'bold',marginBottom:windowWidth*0.03,color:theme==='dark'?'#fafafa':'black'}}>Items</Text>
            
             {items && items.map((item,index)=> (
@@ -141,6 +145,14 @@ const CartScreen = ( ) => {
            ))}
             
         </View>
+          ):(
+            <View style={{width:'95%',alignSelf:'center',height:windowWidth*0.6,justifyContent:'center',alignItems:'center',marginTop:windowWidth*0.7}}>
+                <MaterialIcons name="error" size={windowWidth*0.6} color={theme==='dark'?'#fafafa':"black"} />
+                <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold'}}>NO ITEMS FOUND </Text>
+                </View>
+          )
+        }
+        
   
         <View style={[styles.totalContainer,{paddingHorizontal:windowWidth*0.02,height:windowWidth*0.1,marginBottom:windowWidth*0.06}]}>
             <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold',color:theme==='dark'?'#fafafa':'black'}}>Total</Text>

@@ -6,6 +6,7 @@ import { Fontisto } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import Order from "../api/order";
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 const Orders = () => {
@@ -33,7 +34,10 @@ const Orders = () => {
     },[])
     return(
     <SafeAreaView style={[styles.container,{backgroundColor:theme==='dark'?'#1e1e1e':'white'}]}>
-        <ScrollView style={{flex:1}}>
+        {
+            orders?
+            (
+                <ScrollView style={{flex:1}}>
         <View style={[styles.header,{paddingHorizontal:windowWidth*0.03,paddingVertical:windowWidth*0.08,marginBottom:windowWidth*0.01,backgroundColor:theme==='dark'?'#282a2b':'white'}]}>
         <TouchableOpacity>
         <Fontisto name="angle-left" size={windowWidth*0.07} color={theme==='dark'?'#fafafa':"black"} />
@@ -64,6 +68,13 @@ const Orders = () => {
             }
         </View>
         </ScrollView>
+            ):(
+                <View style={{width:'95%',alignSelf:'center',height:windowWidth*0.6,justifyContent:'center',alignItems:'center',marginTop:windowWidth*0.7}}>
+                <MaterialIcons name="error" size={windowWidth*0.6} color={theme==='dark'?'#fafafa':"black"} />
+                <Text style={{fontSize:windowWidth*0.06,fontWeight:'bold'}}>NO ITEMS FOUND </Text>
+                </View>
+            )
+        }
     </SafeAreaView>)
 }
 

@@ -13,7 +13,7 @@ const SplashSreen = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
     const navigation = useNavigation();
     const [isOnline, setIsOnline] = useState<boolean|null>(null);
-    const [refreshing, setRefreshing] = useState(false);
+   
     const fetchData = async () => {
       const netInfoState = await NetInfo.fetch();
       setIsOnline(netInfoState.isConnected);
@@ -24,15 +24,10 @@ const SplashSreen = () => {
     }, []);
 
     useEffect(() => {
-      isOnline &&
-     ( setTimeout(() => {
+     setTimeout(() => {
         navigation.navigate('Auth');
-      }, 5000))
+      }, 5000)
     }, []);
-
-    const onRefresh = async()=>{
-      fetchData()
-    }
 
     const loadFonts = async () => {
       await Font.loadAsync({
