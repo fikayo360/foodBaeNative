@@ -39,7 +39,7 @@ const Orders = () => {
             (
                 <ScrollView style={{flex:1}}>
         <View style={[styles.header,{paddingHorizontal:windowWidth*0.03,paddingVertical:windowWidth*0.08,marginBottom:windowWidth*0.01,backgroundColor:theme==='dark'?'#282a2b':'white'}]}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
         <Fontisto name="angle-left" size={windowWidth*0.07} color={theme==='dark'?'#fafafa':"black"} />
         </TouchableOpacity>
         <Text style={{fontSize:windowWidth*0.07,color:theme==='dark'?'#fafafa':'black'}}> Orders </Text>
