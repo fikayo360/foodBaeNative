@@ -104,7 +104,6 @@ const AuthScreen = () => {
                 console.log(err.response?.data);
                 setError(err.response?.data)
                 setLoadingL(true)
-                //return err.response?.data;
               }
         }
     }
